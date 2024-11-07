@@ -57,32 +57,11 @@
                             alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>
                 <div class="d-flex align-items-center    ms-4 mb-4">
-                    <div class="position-relative">
-                        @if (auth()->user()->level == 'wajibretribusi')
-                            <img class="rounded-circle" src="{{ url('asset/img/userpro.png') }} " alt=""
-                                style="width: 60px; height: 60px;">
-                        @endif
-                        @if (auth()->user()->level == 'administrator')
-                            <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
-                                style="width: 60px; height: 60px;">
-                        @endif
-                        <div
-                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                        </div>
-                    </div>
-                    <div class="ms-3 ">
 
-                        @if (auth()->user()->level == 'administrator')
-                            <span>Admin</span>
-                        @endif
-                        @if (auth()->user()->level == 'wajibretribusi')
-                            <span>Wajib Retribusi</span>
-                        @endif
-                    </div>
                 </div>
                 <div class="navbar-nav w-100 p-2">
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/Home') }} " class="nav-item nav-link  "> <i
+                        <a href="{{ url('/Home') }} " class="nav-item nav-link active "> <i
                                 class="fa-brands fa-fort-awesome-alt"></i>
                             Beranda Admin </a>
                     @endif
@@ -92,7 +71,7 @@
                             Retribusi</a>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KapalWajibRetribusi') }}" class="nav-item nav-link active"><i
+                        <a href="{{ url('/KapalWajibRetribusi') }}" class="nav-item nav-link "><i
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif
@@ -119,19 +98,23 @@
                                 <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
                                         class="fa-solid fa-list-check"></i>
                                     Retribusi</a>
-                                <a href="{{ url('LaporanBlmBayar') }}" class="dropdown-item"><i
+                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
                                         class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
                             </div>
                         </div>
                     @endif
+                    @if (auth()->user()->level == 'administrator')
+                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                            Logout</a>
+                    @endif
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i
-                                class="fa-brands fa-fort-awesome-alt"></i>
-                            Beranda Wajib Retribusi </a>
+                                class='bx bxs-user-account'></i>
+                            Profile </a>
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -154,6 +137,10 @@
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>
                     @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                            Logout</a>
+                    @endif
 
                 </div>
             </nav>
@@ -171,7 +158,28 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
+                <div class="position-end">
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <img class="rounded-circle" src="{{ url('asset/img/userpro.png') }} " alt=""
+                            style="width: 40px; height: 40px;">
+                    @endif
+                    @if (auth()->user()->level == 'administrator')
+                        <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
+                            style="width: 40px; height: 40px;">
+                    @endif
+                    <div
+                        class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                    </div>
+                </div>
+                <div class="ms-3 ">
 
+                    @if (auth()->user()->level == 'administrator')
+                        <span>Admin</span>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <span>Wajib Retribusi</span>
+                    @endif
+                </div>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
 
@@ -185,16 +193,15 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            @if (auth()->user()->level == 'wajibretribusi')
-                                <a href="{{ url('/Profile') }}" class="dropdown-item"><i
-                                        class='bx bxs-user-account'></i> My Profile</a>
-                            @endif
+                            
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
                     </div>
+                </div>
             </nav>
             <!-- Navbar End -->
+
 
 
 
@@ -203,7 +210,7 @@
 
             
             @if (auth()->user()->level == 'wajibretribusi')
-            <div class="col-sm-12 col-xl-11">
+            <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Kapal Wajib Retribusi</h6> 
                     <form class="d-none d-md-flex col-2">
@@ -239,19 +246,13 @@
 
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid p-1">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">Sirebon</a>, All Right Reserved.
                         </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                            </br>
-                            Distributed By <a class="border-bottom" href="https://themewagon.com"
-                                target="_blank">ThemeWagon</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

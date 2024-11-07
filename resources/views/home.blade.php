@@ -57,7 +57,7 @@
                             alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>
                 <div class="d-flex align-items-center    ms-4 mb-4">
-                   
+
                 </div>
                 <div class="navbar-nav w-100 p-2">
                     @if (auth()->user()->level == 'administrator')
@@ -108,7 +108,8 @@
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/profile') }}" class="nav-item nav-link active"> <i class='bx bxs-user-account' ></i>
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link active"> <i
+                                class='bx bxs-user-account'></i>
                             Profile </a>
                     @endif
 
@@ -157,7 +158,7 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <div class="position-right">
+                <div class="position-end">
                     @if (auth()->user()->level == 'wajibretribusi')
                         <img class="rounded-circle" src="{{ url('asset/img/userpro.png') }} " alt=""
                             style="width: 40px; height: 40px;">
@@ -192,14 +193,12 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            @if (auth()->user()->level == 'wajibretribusi')
-                                <a href="{{ url('/Profile') }}" class="dropdown-item"><i
-                                        class='bx bxs-user-account'></i> My Profile</a>
-                            @endif
+                            
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
                     </div>
+                </div>
             </nav>
             <!-- Navbar End -->
 
@@ -241,82 +240,88 @@
                     </div>
                 </div>
             @endif
-            @if (auth()->user()->level == 'wajibretribusi')
-            <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4 m-1">
-                    <h6 class="mb-4">Profil</h6>
-                    <form>
-                        @csrf
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" value="{{auth()->user()->email}}" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">NIK</label>
-                            <input type="email" class="form-control" value="45678654" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Telepon</label>
-                            <input type="email" class="form-control" value="082345678987" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
-                            <input type="email" class="form-control" value="{{auth()->user()->level}}" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                            <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                            <input type="email" class="form-control" value="bondet" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                        </div> 
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
 
-                
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Password</h6>  
-                    {{-- video orang india 5:14 --}}
-                    <form method="post" action="{{url('change-password')}}" id="updatePasswordForm">
-                        @csrf 
-                        <div class="mb-3">
-                            <label for="namapwlama" class="form-label">Password Lama</label>
-                            <input type="password" class="form-control" name="old_password" id="pwlama" >
-                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="namapwbaru" class="form-label">Password Baru</label>
-                            <input type="password" class="form-control" name="new_passsword" id="pwbaru" >
-                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
-                            <input type="password" class="form-control"name="confirm_password" id="pwconfirm" >
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+            @if (auth()->user()->level == 'wajibretribusi')
+                <div class="col-sm-12 col-xl-12 mt-3">
+                    <div class="bg-light rounded h-100 p-4 m-1">
+                        <h6 class="mb-4">Profil</h6>
+                        <form>
+                            @csrf
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" value="{{ auth()->user()->email }}"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">NIK</label>
+                                <input type="email" class="form-control" value="45678654" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Telepon</label>
+                                <input type="email" class="form-control" value="082345678987"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
+                                <input type="email" class="form-control" value="{{ auth()->user()->level }}"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
+                                <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                <input type="email" class="form-control" value="bondet" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
+
+
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Password</h6>
+                        {{-- video orang india 5:14 --}}
+                        <form method="post" action="{{ url('change-password') }}" id="updatePasswordForm">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="namapwlama" class="form-label">Password Lama</label>
+                                <input type="password" class="form-control" name="old_password" id="pwlama">
+                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="namapwbaru" class="form-label">Password Baru</label>
+                                <input type="password" class="form-control" name="new_passsword" id="pwbaru">
+                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-control"name="confirm_password" id="pwconfirm">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-             
             @endif
 
             <!-- Recent Sales End -->
@@ -330,7 +335,7 @@
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">Sirebon</a>, All Right Reserved.
                         </div>
-                   
+
                     </div>
                 </div>
             </div>
@@ -338,7 +343,7 @@
         </div>
         <!-- Content End -->
 
- 
+
     </div>
 
     <!-- JavaScript Libraries -->
