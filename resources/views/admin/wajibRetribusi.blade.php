@@ -61,12 +61,12 @@
                 </div>
                 <div class="navbar-nav w-100 p-2">
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/Home') }} " class="nav-item nav-link active "> <i
+                        <a href="{{ url('/Home') }} " class="nav-item nav-link  "> <i
                                 class="fa-brands fa-fort-awesome-alt"></i>
                             Beranda Admin </a>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/WajibRetribusi') }}" class="nav-item nav-link "><i
+                        <a href="{{ url('/WajibRetribusi') }}" class="nav-item nav-link active"><i
                                 class='bx bxs-package'></i> Wajib
                             Retribusi</a>
                     @endif
@@ -93,12 +93,12 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i
                                 class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link "><i
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif
