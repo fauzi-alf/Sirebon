@@ -213,7 +213,7 @@
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Kategori Retribusi</h6>
-                    <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical' ></i> Tambah Data </a>
+                    <a href="{{route('KategoriRetribusi.create')}}" type="button" class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical' ></i> Tambah Data </a>
                     <form class="d-none d-md-flex col-2">
                         <input class="form-control border-0" type="search" placeholder="Search">
                     </form> 
@@ -226,60 +226,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($kategori as $index =>$data )
+                                
                             <tr>
-                                <th class="text-center" scope="row">1</th>
-                                <td class="text-center">Kategori Retribusi</td> 
+                                <th class="text-center" scope="row"> {{$index + 1}} </th>
+                                <td class="text-center">{{$data->kategori}}</td> 
+                                
                                 <td class="text-center"><button class="btn p-1 m-1 btn-warning">Edit</button><button class="btn p-1 m-1 btn-danger">Hapus</button></td>
-                                 
+                                
                             </tr>
+                            @endforeach
                             
                         </tbody>
                     </table>
                 </div>
             </div> 
             @endif
-            @if (auth()->user()->level == 'wajibretribusi')
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Line Chart</h6>
-                                <canvas id="line-chart" width="526" height="262" style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Line Chart</h6>
-                                <canvas id="salse-revenue" width="526" height="262" style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Bar Chart</h6>
-                                <canvas id="bar-chart" width="526" height="262" style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Bar Chart</h6>
-                                <canvas id="worldwide-sales" width="526" height="262" style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Pie Chart</h6>
-                                <canvas id="pie-chart" width="526" height="526" style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Doughnut Chart</h6>
-                                <canvas id="doughnut-chart" width="526" height="526" style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+            
 
             <!-- Recent Sales End -->
 

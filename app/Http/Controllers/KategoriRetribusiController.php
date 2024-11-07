@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Kategori;
 class KategoriRetribusiController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class KategoriRetribusiController extends Controller
      */
     public function index()
     {
-        return view('admin.kategoriRetribusi');
+        $kategori = Kategori::all();
+        return view('admin.kategoriRetribusi',compact('kategori'));
     }
     public function indexWR()
     {
@@ -23,7 +24,7 @@ class KategoriRetribusiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kategori.create');
     }
 
     /**
@@ -31,7 +32,13 @@ class KategoriRetribusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kategori' => 'required|string|max:50',
+        ]);
+
+        Kategori::create($request->all());
+
+        return redirect()->route('KategoriRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
     /**
