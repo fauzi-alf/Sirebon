@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Sirepal</title>
+    <title>Sirebon</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -54,7 +54,7 @@
 
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img class="rounded-circle" src="{{ url('asset/img/klrrR.png') }} "
-                            alt="" style="width: 60px; height: 60px;"></box-icon> Sirepal</h3>
+                            alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>
                 <div class="d-flex align-items-center    ms-4 mb-4">
                     <div class="position-relative">
@@ -203,6 +203,7 @@
                 <div class="bg-light rounded h-100 p-4 m-1">
                     <h6 class="mb-4">Profil</h6>
                     <form>
+                        @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" class="form-control" value="{{auth()->user()->email}}" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -245,23 +246,25 @@
 
                 
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Password</h6>
-                    <form>
+                    <h6 class="mb-4">Password</h6>  
+                    {{-- video orang india 5:14 --}}
+                    <form method="post" action="{{url('change-password')}}" id="updatePasswordForm">
+                        @csrf 
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Password Laama</label>
-                            <input type="password" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
+                            <label for="namapwlama" class="form-label">Password Lama</label>
+                            <input type="password" class="form-control" name="old_password" id="pwlama" >
+                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Password Baru</label>
-                            <input type="password" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp">
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
+                            <label for="namapwbaru" class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" name="new_passsword" id="pwbaru" >
+                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Konfirmasi Password Baru</label>
-                            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
+                            <input type="password" class="form-control"name="confirm_password" id="pwconfirm" >
                             {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                         </div>
@@ -282,7 +285,7 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirepal</a>, All Right Reserved.
+                            &copy; <a href="#">Sirebon</a>, All Right Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
                             <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
