@@ -57,28 +57,7 @@
                             alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>
                 <div class="d-flex align-items-center    ms-4 mb-4">
-                    <div class="position-relative">
-                        @if (auth()->user()->level == 'wajibretribusi')
-                            <img class="rounded-circle" src="{{ url('asset/img/userpro.png') }} " alt=""
-                                style="width: 60px; height: 60px;">
-                        @endif
-                        @if (auth()->user()->level == 'administrator')
-                            <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
-                                style="width: 60px; height: 60px;">
-                        @endif
-                        <div
-                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                        </div>
-                    </div>
-                    <div class="ms-3 ">
-
-                        @if (auth()->user()->level == 'administrator')
-                            <span>Admin</span>
-                        @endif
-                        @if (auth()->user()->level == 'wajibretribusi')
-                            <span>Wajib Retribusi</span>
-                        @endif
-                    </div>
+                   
                 </div>
                 <div class="navbar-nav w-100 p-2">
                     @if (auth()->user()->level == 'administrator')
@@ -119,15 +98,18 @@
                                 <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
                                         class="fa-solid fa-list-check"></i>
                                     Retribusi</a>
-                                <a href="{{ url('LaporanBlmBayar') }}" class="dropdown-item"><i
+                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
                                         class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
                             </div>
                         </div>
                     @endif
+                    @if (auth()->user()->level == 'administrator')
+                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                            Logout</a>
+                    @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link active"> <i
-                                class="fa-brands fa-fort-awesome-alt"></i>
-                            Beranda Wajib Retribusi </a>
+                        <a href="{{ url('/profile') }}" class="nav-item nav-link active"> <i class='bx bxs-user-account' ></i>
+                            Profile </a>
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -154,6 +136,10 @@
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>
                     @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                            Logout</a>
+                    @endif
 
                 </div>
             </nav>
@@ -171,7 +157,28 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
+                <div class="position-right">
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <img class="rounded-circle" src="{{ url('asset/img/userpro.png') }} " alt=""
+                            style="width: 40px; height: 40px;">
+                    @endif
+                    @if (auth()->user()->level == 'administrator')
+                        <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
+                            style="width: 40px; height: 40px;">
+                    @endif
+                    <div
+                        class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                    </div>
+                </div>
+                <div class="ms-3 ">
 
+                    @if (auth()->user()->level == 'administrator')
+                        <span>Admin</span>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <span>Wajib Retribusi</span>
+                    @endif
+                </div>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
 
@@ -235,52 +242,81 @@
                 </div>
             @endif
             @if (auth()->user()->level == 'wajibretribusi')
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Line Chart</h6>
-                                <canvas id="line-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-light rounded h-100 p-4 m-1">
+                    <h6 class="mb-4">Profil</h6>
+                    <form>
+                        @csrf
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" value="{{auth()->user()->email}}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
                         </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Line Chart</h6>
-                                <canvas id="salse-revenue" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">NIK</label>
+                            <input type="email" class="form-control" value="45678654" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
                         </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Bar Chart</h6>
-                                <canvas id="bar-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Telepon</label>
+                            <input type="email" class="form-control" value="082345678987" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
                         </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Bar Chart</h6>
-                                <canvas id="worldwide-sales" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
+                            <input type="email" class="form-control" value="{{auth()->user()->level}}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
                         </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Pie Chart</h6>
-                                <canvas id="pie-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
+                            <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
                         </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Doughnut Chart</h6>
-                                <canvas id="doughnut-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                            <input type="email" class="form-control" value="bondet" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                        </div> 
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
                 </div>
+
+                
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Password</h6>  
+                    {{-- video orang india 5:14 --}}
+                    <form method="post" action="{{url('change-password')}}" id="updatePasswordForm">
+                        @csrf 
+                        <div class="mb-3">
+                            <label for="namapwlama" class="form-label">Password Lama</label>
+                            <input type="password" class="form-control" name="old_password" id="pwlama" >
+                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="namapwbaru" class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" name="new_passsword" id="pwbaru" >
+                            {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
+                            <input type="password" class="form-control"name="confirm_password" id="pwconfirm" >
+                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+             
             @endif
 
             <!-- Recent Sales End -->
@@ -302,9 +338,7 @@
         </div>
         <!-- Content End -->
 
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+ 
     </div>
 
     <!-- JavaScript Libraries -->
