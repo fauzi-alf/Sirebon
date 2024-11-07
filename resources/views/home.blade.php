@@ -193,7 +193,7 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            
+
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
@@ -201,6 +201,7 @@
                 </div>
             </nav>
             <!-- Navbar End -->
+
 
 
 
@@ -333,7 +334,7 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika 
+                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika
                         </div>
 
                     </div>
@@ -345,8 +346,20 @@
 
 
     </div>
+    @if (session('login_success'))
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Login berhasil",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
 
     <!-- JavaScript Libraries -->
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
     <script src=" {{ url('https://code.jquery.com/jquery-3.4.1.min.js') }} "></script>
     <script src=" {{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js') }} "></script>
     <script src=" {{ url('asset/lib/chart/chart.min.js') }} "></script>

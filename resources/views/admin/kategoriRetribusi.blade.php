@@ -108,13 +108,13 @@
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i
-                                class='bx bxs-user-account'></i>
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
                             Profile </a>
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
+                                class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -193,7 +193,7 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            
+
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
@@ -209,40 +209,51 @@
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
-            @if (auth()->user()->level == 'administrator') 
-            <div class="col-sm-12 col-xl-11 mt-3">
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Kategori Retribusi</h6>
-                    <a href="{{route('KategoriRetribusi.create')}}" type="button" class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical' ></i> Tambah Data </a>
-                    <form class="d-none d-md-flex col-2">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form> 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center" scope="col">No.</th>
-                                <th class="text-center" scope="col">Kategori retribusi</th> 
-                                <th class="text-center" scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kategori as $index =>$data )
-                                
-                            <tr>
-                                <th class="text-center" scope="row"> {{$index + 1}} </th>
-                                <td class="text-center">{{$data->kategori}}</td> 
-                                
-                                <td class="text-center"><button class="btn p-1 m-1 btn-warning">Edit</button><button class="btn p-1 m-1 btn-danger">Hapus</button></td>
-                                
-                            </tr>
-                            @endforeach
-                            
-                        </tbody>
-                    </table>
+            @if (auth()->user()->level == 'administrator')
+                <div class="col-sm-12 col-xl-11 mt-3">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Kategori Retribusi</h6>
+                        <a href="{{ route('KategoriRetribusi.create') }}" type="button"
+                            class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data
+                        </a>
+                        <form class="d-none d-md-flex col-2">
+                            <input class="form-control border-0" type="search" placeholder="Search">
+                        </form>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Kategori retribusi</th>
+                                    <th class="text-center" scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kategori as $index => $data)
+                                    <tr>
+                                        <th class="text-center" scope="row"> {{ $index + 1 }} </th>
+                                        <td class="text-center">{{ $data->kategori }}</td>
+                                        <td class="text-center"><a
+                                                href="{{ route('KategoriRetribusi.edit', $data->id) }}"
+                                                class="btn btn-warning btn-sm m-1">Ubah</a>
+                                            <form action="{{ route('KategoriRetribusi.destroy', $data->id) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+
+
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div> 
             @endif
-            
+
 
             <!-- Recent Sales End -->
 
@@ -253,9 +264,9 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika 
+                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -263,7 +274,7 @@
         </div>
         <!-- Content End -->
 
- 
+
     </div>
 
     <!-- JavaScript Libraries -->
@@ -277,6 +288,7 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>

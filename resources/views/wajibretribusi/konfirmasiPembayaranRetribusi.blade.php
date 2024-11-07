@@ -278,7 +278,7 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
-
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>
 </body>

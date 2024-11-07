@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\KapalController;
+use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\PembayaranController;
+use App\Http\Controllers\Admin\RekeningController;
+// use App\Http\Controllers\Admin\WajibRetribusiController;
+
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WajibRetribusiController;
 use App\Http\Controllers\WajibRetribusiNoCRUDController;
 use App\Http\Controllers\KapalkuController;

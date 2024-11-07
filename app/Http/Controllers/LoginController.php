@@ -16,6 +16,9 @@ class LoginController extends Controller
     
        public function postlogin(Request $request){
         if(Auth::attempt($request->only('email','password'))){
+           
+            
+            session()->flash('login_success');
             return redirect('/Home');
         }
         return redirect('/');
@@ -24,7 +27,8 @@ class LoginController extends Controller
     
        public function logout( ){
         Auth::logout();
-        return redirect ('/');
+        session()->flash('logout');
+        return redirect ('/login');
         
        } 
        public function processChangePassword(Request $request){
