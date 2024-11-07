@@ -85,11 +85,7 @@
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi</a>
-                    @endif
+                     
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -122,17 +118,16 @@
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i class='bx bxs-category'></i>
+                        Kategori
+                        Retribusi
+                    </a>
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link active"><i
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KategoriRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi </a>
-                    @endif
-
+                     
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>

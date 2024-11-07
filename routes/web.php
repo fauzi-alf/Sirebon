@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth','ceklevel:administrator,wajibretribusi']],
         return view('home');
     })->name('home');
     
-    Route::resource('KategoriRetribusi',KategoriRetribusiController::class);
+    Route::resource('KategoriRetribusi',KategoriController::class);
     Route::get('/LaporanBlmBayar',[LaporanAdminController::class,'index'])->name('LaporanBlmBayar');
     Route::get('/Laporan',[WajibRetribusiNoCRUDController::class,'index'])->name('Laporan');
     Route::get('/RekeningPembayaranRetribusi',[RekeningPembayaranRetribusiController::class,'index'])->name('RekeningPembayaranRetrisbusi');
@@ -120,8 +120,8 @@ Route::group(['middleware' => ['auth','ceklevel:administrator,wajibretribusi']],
     Route::get('/Profile',[ProfileController::class,'index'])->name('Profile');
     Route::get('/Kapalku',[KapalkuController::class,'index'])->name('Kapalku');
     Route::get('/KapalWajibRetribusiWR',[KapalWajibRetribusiController::class,'indexWR'])->name('KapalWajibRetribusi');
-    Route::get('/KategoriRetribusiWR',[KategoriRetribusiController::class,'indexWR'])->name('kategoriRetribusi');
-
+    
+    // Route::get('/KategoriRetribusiWR',[KategoriRetribusiController::class,'indexWR'])->name('kategoriRetribusi');
     // Route::get('/GantiPassword',[GantiPasswordController::class,'gantiPassword'])->name('GantiPassword');
     // Route::post('/UpdatePassword',[GantiPasswordController::class,'UpdatePassword'])->name('GantiPassword');
 

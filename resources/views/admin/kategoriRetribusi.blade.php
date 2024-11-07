@@ -85,11 +85,35 @@
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link active"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi</a>
+
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
+                            Profile </a>
                     @endif
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
+                            Kapalku</a>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                                class='bx bxs-ship'></i> Kapal Wajib
+                            Retribusi </a>
+                    @endif
+
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link active"><i
+                            class='bx bxs-category'></i> Kategori
+                        Retribusi
+                    </a>
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
+                                class="fa-solid fa-user-check"></i> Konfirmasi
+                            Pembayaran Retribusi</a>
+                    @endif
+
+
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -107,32 +131,6 @@
                         <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
-                            Profile </a>
-                    @endif
-
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
-                                class="fa-solid fa-ship"></i>
-                            Kapalku</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-ship'></i> Kapal Wajib
-                            Retribusi </a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
-                                class="fa-solid fa-user-check"></i> Konfirmasi
-                            Pembayaran Retribusi</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KategoriRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi </a>
-                    @endif
-
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>
@@ -209,29 +207,31 @@
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
-            @if (auth()->user()->level == 'administrator')
-                <div class="col-sm-12 col-xl-11 mt-3">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Kategori Retribusi</h6>
+            <div class="col-sm-12 col-xl-11 mt-3">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Kategori Retribusi</h6>
+                    @if (auth()->user()->level == 'administrator')
                         <a href="{{ route('KategoriRetribusi.create') }}" type="button"
                             class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data
                         </a>
-                        <form class="d-none d-md-flex col-2">
-                            <input class="form-control border-0" type="search" placeholder="Search">
-                        </form>
-                        <table class="table table-striped">
-                            <thead>
+                    @endif
+                    <form class="d-none d-md-flex col-2">
+                        <input class="form-control border-0" type="search" placeholder="Search">
+                    </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col">No.</th>
+                                <th class="text-center" scope="col">Kategori retribusi</th>
+                                <th class="text-center" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kategori as $index => $data)
                                 <tr>
-                                    <th class="text-center" scope="col">No.</th>
-                                    <th class="text-center" scope="col">Kategori retribusi</th>
-                                    <th class="text-center" scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($kategori as $index => $data)
-                                    <tr>
-                                        <th class="text-center" scope="row"> {{ $index + 1 }} </th>
-                                        <td class="text-center">{{ $data->kategori }}</td>
+                                    <th class="text-center" scope="row"> {{ $index + 1 }} </th>
+                                    <td class="text-center">{{ $data->kategori }}</td>
+                                    @if (auth()->user()->level == 'administrator')
                                         <td class="text-center"><a
                                                 href="{{ route('KategoriRetribusi.edit', $data->id) }}"
                                                 class="btn btn-warning btn-sm m-1">Ubah</a>
@@ -243,16 +243,16 @@
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                             </form>
                                         </td>
+                                    @endif
 
+                                </tr>
+                            @endforeach
 
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-            @endif
+            </div>
+
 
 
             <!-- Recent Sales End -->
@@ -288,7 +288,7 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
-    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>

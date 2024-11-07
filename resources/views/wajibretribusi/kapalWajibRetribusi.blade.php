@@ -85,11 +85,7 @@
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi</a>
-                    @endif
+
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -108,8 +104,7 @@
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i
-                                class='bx bxs-user-account'></i>
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
                             Profile </a>
                     @endif
 
@@ -122,16 +117,16 @@
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i class='bx bxs-category'></i>
+                        Kategori
+                        Retribusi
+                    </a>
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KategoriRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi </a>
-                    @endif
+
 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
@@ -193,7 +188,7 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            
+
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
@@ -208,37 +203,37 @@
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
-            
+
             @if (auth()->user()->level == 'wajibretribusi')
-            <div class="col-sm-12 col-xl-11 mt-3">
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Kapal Wajib Retribusi</h6> 
-                    <form class="d-none d-md-flex col-2">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form> 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center" scope="col">No.</th> 
-                                <th class="text-center" scope="col">Nama Kapal</th>
-                                <th class="text-center" scope="col">Nilai Retribusi</th>
-                                <th class="text-center" scope="col">Tanggal Pembayaran</th>  
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="text-center" scope="row">1</th>
-                                <td class="text-center">Iqbal Ramadhan</td>
-                                <td class="text-center">99.999.999</td>
-                                <td class="text-center">14 agustus 2022</td>
-                                
-                                 
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+                <div class="col-sm-12 col-xl-11 mt-3">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Kapal Wajib Retribusi</h6>
+                        <form class="d-none d-md-flex col-2">
+                            <input class="form-control border-0" type="search" placeholder="Search">
+                        </form>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Nama Kapal</th>
+                                    <th class="text-center" scope="col">Nilai Retribusi</th>
+                                    <th class="text-center" scope="col">Tanggal Pembayaran</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="text-center" scope="row">1</th>
+                                    <td class="text-center">Iqbal Ramadhan</td>
+                                    <td class="text-center">99.999.999</td>
+                                    <td class="text-center">14 agustus 2022</td>
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div> 
             @endif
 
             <!-- Recent Sales End -->
@@ -250,9 +245,9 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika 
+                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -260,7 +255,7 @@
         </div>
         <!-- Content End -->
 
- 
+
     </div>
 
     <!-- JavaScript Libraries -->
@@ -274,7 +269,7 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
-    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>

@@ -85,11 +85,27 @@
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi</a>
+
+                    
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
+                            Profile </a>
                     @endif
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
+                                class="fa-solid fa-ship"></i>
+                            Kapalku</a>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                                class='bx bxs-ship'></i> Kapal Wajib
+                            Retribusi </a>
+                    @endif
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link "><i
+                            class='bx bxs-category'></i> Kategori
+                        Retribusi
+                    </a>
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -108,30 +124,11 @@
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i
-                                class='bx bxs-user-account'></i>
-                            Profile </a>
-                    @endif
-
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i class="fa-solid fa-ship"></i>
-                            Kapalku</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-ship'></i> Kapal Wajib
-                            Retribusi </a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KategoriRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi </a>
-                    @endif
+
 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
@@ -193,7 +190,7 @@
                             <i class='bx bx-cog'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            
+
                             <a href="{{ route('logout') }}" class="dropdown-item"><i class='bx bx-log-out'></i> Log
                                 Out</a>
                         </div>
@@ -213,10 +210,11 @@
                 <div class="col-sm-12 col-xl-11 mt-3">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Wajib retribusi</h6>
-                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data </a>
+                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i
+                                class='bx bx-plus-medical'></i> Tambah Data </a>
                         <form class="d-none d-md-flex col-2">
                             <input class="form-control border-0" type="search" placeholder="Search">
-                        </form> 
+                        </form>
 
                         <table class="table table-striped">
                             <thead>
@@ -307,16 +305,16 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika 
+                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
- 
+
     </div>
 
     <!-- JavaScript Libraries -->
@@ -330,7 +328,7 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
-    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>

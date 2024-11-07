@@ -85,11 +85,32 @@
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
-                    @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi</a>
+
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Home') }}" class="nav-item nav-link active"> <i
+                                class='bx bxs-user-account'></i>
+                            Profile </a>
                     @endif
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                            Kapalku</a>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                                class='bx bxs-ship'></i> Kapal Wajib
+                            Retribusi </a>
+                    @endif
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link "><i
+                            class='bx bxs-category'></i> Kategori
+                        Retribusi</a>
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
+                                class="fa-solid fa-user-check"></i> Konfirmasi
+                            Pembayaran Retribusi</a>
+                    @endif
+
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -107,32 +128,6 @@
                         <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link active"> <i
-                                class='bx bxs-user-account'></i>
-                            Profile </a>
-                    @endif
-
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
-                            Kapalku</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-ship'></i> Kapal Wajib
-                            Retribusi </a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
-                                class="fa-solid fa-user-check"></i> Konfirmasi
-                            Pembayaran Retribusi</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KategoriRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-category'></i> Kategori
-                            Retribusi </a>
-                    @endif
-
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>
@@ -359,7 +354,7 @@
     @endif
 
     <!-- JavaScript Libraries -->
-    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
     <script src=" {{ url('https://code.jquery.com/jquery-3.4.1.min.js') }} "></script>
     <script src=" {{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js') }} "></script>
     <script src=" {{ url('asset/lib/chart/chart.min.js') }} "></script>
