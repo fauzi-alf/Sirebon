@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\MsRekening;
+use App\Models\RefBank; 
 class RekeningController extends Controller
 {
     /**
@@ -12,7 +13,8 @@ class RekeningController extends Controller
      */
     public function index()
     {
-        //
+        $rekening = MsRekening::all();
+        return view('admin.rekeningPembayaranRetribusi', compact('rekening')); 
     }
 
     /**
@@ -20,7 +22,9 @@ class RekeningController extends Controller
      */
     public function create()
     {
-        //
+        
+        $refBanks = RefBank::all();
+        return view('admin.rekening.create', compact('refBanks'));
     }
 
     /**
@@ -28,7 +32,14 @@ class RekeningController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_ref_bank' => 'required|exists:ref_bank,id',
+            'nama_akun' => 'required|string|max:50',
+            'no_rekening' => 'required|string|max:50',
+        ]);
+
+        MsRekening::create($request->all());
+        return redirect()->route('RekeningPembayaranRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +55,9 @@ class RekeningController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $rekening = MsRekening::findOrFail($id);
+        $refBanks = RefBank::all();
+        return view('Admin.Rekening.edit', compact('rekening', 'refBanks'));
     }
 
     /**
@@ -52,7 +65,17 @@ class RekeningController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'id_ref_bank' => 'required|exists:ref_bank,id',
+            'nama_akun' => 'required|string|max:50',
+            'no_rekening' => 'required|string|max:50',
+        ]);
+
+        $rekening = MsRekening::findOrFail($id);
+
+        $rekening->update($request->all());
+
+        return redirect()->route('RekeningPembayaranRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
     /**
@@ -60,6 +83,8 @@ class RekeningController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $rekening = MsRekening::findOrFail($id);
+        $rekening->delete();
+        return redirect()->route('RekeningPembayaranRetribusi.index')->with('success', 'Data rekening berhasil dihapus.');
     }
 }

@@ -208,7 +208,7 @@
                 <div class="col-sm-12 col-xl-11 mt-3">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Rekening Pembayaran</h6>
-                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i
+                        <a href="{{route('RekeningPembayaranRetribusi.create')}}"  class="btn btn-primary rounded-pill m-2"><i
                                 class='bx bx-plus-medical'></i> Tambah Data </a>
                         <form class="d-none d-md-flex col-2">
                             <input class="form-control border-0" type="search" placeholder="Search">
@@ -224,16 +224,27 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($rekening as $index => $data)
                                 <tr>
-                                    <th class="text-center" scope="row">1</th>
-                                    <td class="text-center">Mandiri syariaah</td>
-                                    <td class="text-center">Iqbal Ramandhan</td>
-                                    <td class="text-center">456789</td>
-                                    <td class="text-center"><button
-                                            class="btn p-1 m-1 btn-warning">Edit</button><button
-                                            class="btn p-1 m-1 btn-danger">Hapus</button></td>
+                                    <td scope="col" class="text-center">{{ $index + 1 }}.</td>
+                                    <td scope="col" class="text-center">
+                                        {{ $data->refBank->nama_bank }}</td>
+                                    <td scope="col" class="text-center">{{ $data->nama_akun }}</td>
+                                    <td scope="col" class="text-center">{{ $data->no_rekening }}</td>
+                                    <td scope="col" class="text-center">
+                                        <a href="{{ route('RekeningPembayaranRetribusi.edit', $data->id) }}"
+                                            class="btn btn-primary btn-sm m-1">Ubah</a>
 
+                                        <form action="{{ route('RekeningPembayaranRetribusi.destroy', $data->id) }}"
+                                            method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        </form>
+                                    </td>
                                 </tr>
+                            @endforeach
 
                             </tbody>
                         </table>
