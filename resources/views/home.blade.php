@@ -88,13 +88,13 @@
 
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link active"> <i
+                        <a href="{{ url('/Profile') }}" class="nav-item nav-link active"> <i
                                 class='bx bxs-user-account'></i>
                             Profile </a>
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -162,9 +162,9 @@
                         <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
                             style="width: 40px; height: 40px;">
                     @endif
-                    <div
+                    {{-- <div
                         class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="ms-3 ">
 
@@ -202,7 +202,11 @@
 
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
-
+                @session('success')
+                <div class="text-center m-2 p-2 alert alert-success">
+                    Login Berhasil
+                </div>
+                @endsession
             @if (auth()->user()->level == 'administrator')
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-4">

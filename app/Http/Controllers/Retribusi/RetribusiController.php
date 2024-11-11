@@ -12,7 +12,7 @@ class RetribusiController extends Controller
      */
     public function index()
     {
-        //
+        return view ('wajibretribusi.profile');
     }
 
     /**

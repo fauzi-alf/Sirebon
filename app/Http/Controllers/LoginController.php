@@ -18,8 +18,9 @@ class LoginController extends Controller
         if(Auth::attempt($request->only('email','password'))){
            
             
-            session()->flash('login_success');
-            return redirect('/Home');
+            // session()->flash('login_success');
+            return redirect('/Home')->with('success', 'Berhasil Login');
+            
         }
         return redirect('/');
        }
@@ -28,7 +29,7 @@ class LoginController extends Controller
        public function logout( ){
         Auth::logout();
         session()->flash('logout');
-        return redirect ('/login');
+        return redirect ('/login')->with('success', 'Berhasil logout');
         
        } 
        public function processChangePassword(Request $request){

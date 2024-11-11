@@ -86,6 +86,31 @@
                             Pembayaran Retribusi</a>
                     @endif
 
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/Profile') }}" class="nav-item nav-link active"> <i
+                                class='bx bxs-user-account'></i>
+                            Profile </a>
+                    @endif
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                            Kapalku</a>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                                class='bx bxs-ship'></i> Kapal Wajib
+                            Retribusi </a>
+                    @endif
+                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link "><i
+                            class='bx bxs-category'></i> Kategori
+                        Retribusi</a>
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
+                                class="fa-solid fa-user-check"></i> Konfirmasi
+                            Pembayaran Retribusi</a>
+                    @endif
+
                     @if (auth()->user()->level == 'administrator')
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -103,32 +128,6 @@
                         <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Home') }}" class="nav-item nav-link "> <i class='bx bxs-user-account'></i>
-                            Profile </a>
-                    @endif
-
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
-                                class="fa-solid fa-ship"></i>
-                            Kapalku</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
-                                class='bx bxs-ship'></i> Kapal Wajib
-                            Retribusi </a>
-                    @endif
-                    <a href="{{ url('/KategoriRetribusi') }}" class="nav-item nav-link "><i
-                            class='bx bxs-category'></i> Kategori
-                        Retribusi
-                    </a>
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
-                                class="fa-solid fa-user-check"></i> Konfirmasi
-                            Pembayaran Retribusi</a>
-                    @endif
-
-
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
                             Laporan</a>
@@ -163,9 +162,9 @@
                         <img class="rounded-circle" src="{{ url('asset/img/adminpro.png') }} " alt=""
                             style="width: 40px; height: 40px;">
                     @endif
-                    <div
+                    {{-- <div
                         class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="ms-3 ">
 
@@ -202,22 +201,89 @@
 
 
 
-
-
-
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
+             
 
             @if (auth()->user()->level == 'wajibretribusi')
-                <div class="col-sm-12 col-xl-11 mt-3">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Kapal Wajib Retribusi</h6>
-                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i
-                                class='bx bx-plus-medical'></i> Tambah Data </a>
-                        <form class="d-none d-md-flex col-2">
-                            <input class="form-control border-0" type="search" placeholder="Search">
+                <div class="col-sm-12 col-xl-12 mt-3">
+                    <div class="bg-light rounded h-100 p-4 m-1">
+                        <h6 class="mb-4">Profil</h6>
+                        <form>
+                            @csrf
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" value="{{ auth()->user()->email }}"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">NIK</label>
+                                <input type="email" class="form-control" value="45678654" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Telepon</label>
+                                <input type="email" class="form-control" value="082345678987"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
+                                <input type="email" class="form-control" value="{{ auth()->user()->level }}"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
+                                <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Alamat</label>
+                                <input type="email" class="form-control" value="bondet" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
+                    </div>
 
+
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Password</h6>
+                        {{-- video orang india 5:14 --}}
+                        <form method="post" action="{{ url('change-password') }}" id="updatePasswordForm">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="namapwlama" class="form-label">Password Lama</label>
+                                <input type="password" class="form-control" name="old_password" id="pwlama">
+                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="namapwbaru" class="form-label">Password Baru</label>
+                                <input type="password" class="form-control" name="new_passsword" id="pwbaru">
+                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </divname=> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-control"name="confirm_password" id="pwconfirm">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
                     </div>
                 </div>
             @endif
@@ -227,7 +293,7 @@
 
 
             <!-- Footer Start -->
-            <div class="container-fluid p-1">
+            <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
@@ -243,8 +309,20 @@
 
 
     </div>
+    @if (session('login_success'))
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Login berhasil",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
 
     <!-- JavaScript Libraries -->
+    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
     <script src=" {{ url('https://code.jquery.com/jquery-3.4.1.min.js') }} "></script>
     <script src=" {{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js') }} "></script>
     <script src=" {{ url('asset/lib/chart/chart.min.js') }} "></script>
@@ -255,7 +333,6 @@
     <script src=" {{ url('asset/lib/tempusdominus/js/moment-timezone.min.js') }} "></script>
     <script src=" {{ url('asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }} "></script>
     <script src=" {{ url(' https://unpkg.com/boxicons@2.1.4/dist/boxicons.js ') }} "></script>
-    <script src=" {{ url('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>

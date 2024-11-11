@@ -15,8 +15,9 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        User::truncate();
+    { 
+        \App\Models\User::query()->delete();
+        
         User::create([
             'name' => 'Admin aplikasi',
             'level' => 'administrator',
