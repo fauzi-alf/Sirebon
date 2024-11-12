@@ -38,14 +38,14 @@
                             <input type="hidden" name="token" value="{{request()->token}}">
                             <input type="password" name="password" class="form-control rounded-3" id="floatingInput"
                                 placeholder="name@example.com">
-                            <label for="floatingInput">Password </label>
+                            <label for="floatingInput">Password Baru</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" name="password_confirmation" class="form-control rounded-3" id="floatingInput"
                                 placeholder="name@example.com">
-                            <label for="floatingInput">konfirmasi Password </label>
+                            <label for="floatingInput">konfirmasi Password Baru</label>
                         </div>
-                        <button  class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Simpan Password</button>
+                        <button  class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Simpan Password Baru</button>
 
 
                     </form>

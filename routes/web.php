@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 
+// use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KapalController;
-use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\WajibRetribusiController;
@@ -18,12 +18,12 @@ use App\Http\Controllers\Retribusi\RetribusiController;
 
 
 use App\Http\Controllers\LoginController;
-// use App\Http\Controllers\WajibRetribusiController;
-use App\Http\Controllers\WajibRetribusiNoCRUDController; 
-use App\Http\Controllers\KapalWajibRetribusiController; 
+use App\Http\Controllers\WajibRetribusiNoCRUDController;
+use App\Http\Controllers\KapalWajibRetribusiController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranRetribusiController;
 use App\Http\Controllers\KonfirmasiRetribusiController;
-use App\Http\Controllers\LaporanAdminController;
+use App\Http\Controllers\LaporanAdminController; 
 // use App\Http\Controllers\RekeningPembayaranRetribusiController;
 // use App\Http\Controllers\GantiPasswordController;
 
@@ -42,7 +42,7 @@ Route::get('/', function () {
     return view('login.login-form');
 });
 
-Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login'); 
+Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 
 
@@ -88,14 +88,13 @@ Route::post('/reset-password', function (Request $request) {
 
             event(new PasswordReset($user));
         }
-    ); 
+    );
     return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('status', __($status))
+        ? redirect()->route('login')->with('rs-completed','Reset Password Berhasil, Silahkan Login')
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
-
-Route::post('/change-password', [LoginController::class, 'processChangePassword'])->name('changePassword');
+ 
 
 
 
@@ -118,7 +117,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
     Route::get('/KapalWajibRetribusi', [KapalWajibRetribusiController::class, 'index'])->name('kapalWajibRetribusi');
     Route::get('/LaporanRetribusi', [LaporanAdminController::class, 'index2'])->name('LaporanRetribusi');
     Route::get('/KapalWajibRetribusiWR', [KapalWajibRetribusiController::class, 'indexWR'])->name('KapalWajibRetribusi');
-    
+
     // Route::get('/Kapalku', [KapalkuController::class, 'index'])->name('Kapalku');
     // Route::get('/Profile', [ProfileController::class, 'index'])->name('Profile');
     // Route::get('/KategoriRetribusiWR',[KategoriRetribusiController::class,'indexWR'])->name('kategoriRetribusi');
