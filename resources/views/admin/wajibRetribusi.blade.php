@@ -98,7 +98,7 @@
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link "><i
+                        <a href="{{ url('KapalWajibRetribusi') }}" class="nav-item nav-link "><i
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif

@@ -18,8 +18,7 @@ use App\Http\Controllers\Retribusi\RetribusiController;
 
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\WajibRetribusiNoCRUDController;
-use App\Http\Controllers\KapalWajibRetribusiController;
+use App\Http\Controllers\WajibRetribusiNoCRUDController; 
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranRetribusiController;
 use App\Http\Controllers\KonfirmasiRetribusiController;
@@ -105,8 +104,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
         return view('home');
     })->name('home');
 
-    Route::resource('Profile', RetribusiController::class);
     // Route::resource('KategoriRetribusi', KategoriRetribusiController::class);
+    Route::resource('KapalWajibRetribusi', KapalController::class);
+    Route::resource('Profile', RetribusiController::class);
     Route::resource('KategoriRetribusi', KategoriController::class);
     Route::resource('RekeningPembayaranRetribusi', RekeningController::class);
     Route::resource('WajibRetribusi', WajibRetribusiController::class);
@@ -114,10 +114,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
     Route::get('/Laporan', [WajibRetribusiNoCRUDController::class, 'index'])->name('Laporan');
     Route::get('/PembayaranRetribusi', [PembayaranRetribusiController::class, 'index'])->name('PembayaranRetrisbusi');
     Route::get('/KonfirmasiPembayaranretribusi', [KonfirmasiRetribusiController::class, 'index'])->name('KonfirmasiPembayaranRetribusi');
-    Route::get('/KapalWajibRetribusi', [KapalWajibRetribusiController::class, 'index'])->name('kapalWajibRetribusi');
     Route::get('/LaporanRetribusi', [LaporanAdminController::class, 'index2'])->name('LaporanRetribusi');
-    Route::get('/KapalWajibRetribusiWR', [KapalWajibRetribusiController::class, 'indexWR'])->name('KapalWajibRetribusi');
-
+    
+    
+    // Route::get('/KapalWajibRetribusi', [KapalController::class, 'index'])->name('kapalWajibRetribusi');
     // Route::get('/Kapalku', [KapalkuController::class, 'index'])->name('Kapalku');
     // Route::get('/Profile', [ProfileController::class, 'index'])->name('Profile');
     // Route::get('/KategoriRetribusiWR',[KategoriRetribusiController::class,'indexWR'])->name('kategoriRetribusi');

@@ -93,12 +93,11 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
-                                class="fa-solid fa-ship"></i>
+                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('KapalWajibRetribusiWR') }}" class="nav-item nav-link"><i
+                        <a href="{{ url('KapalWajibRetribusi') }}" class="nav-item nav-link active"><i
                                 class='bx bxs-ship'></i> Kapal Wajib
                             Retribusi </a>
                     @endif
@@ -205,92 +204,58 @@
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
-            @if (auth()->user()->level == 'administrator')
-                <div class="col-sm-12 col-xl-11 mt-3">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Kapal Wajib Retribusi</h6>
-                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i
-                                class='bx bx-plus-medical'></i> Tambah Data </a>
-                        <form class="d-none d-md-flex col-2">
-                            <input class="form-control border-0" type="search" placeholder="Search">
-                        </form>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col">No.</th>
-                                    <th class="text-center" scope="col">Nama Pemilik</th>
-                                    <th class="text-center" scope="col">Nama Kapal</th>
-                                    <th class="text-center" scope="col">Jenis Kapal</th>
-                                    <th class="text-center" scope="col">Ukuran</th>
+            <div class="col-sm-12 col-xl-11 mt-3">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Kapal Wajib Retribusi</h6>
+                    @if (auth()->user()->level == 'administrator')
+                        <a href="{{ route('KapalWajibRetribusi.create') }}"
+                            class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data
+                        </a>
+                    @endif
+                    <form class="d-none d-md-flex col-2">
+                        <input class="form-control border-0" type="search" placeholder="Search">
+                    </form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col">No.</th>
+                                <th class="text-center" scope="col">Nama Pemilik</th>
+                                <th class="text-center" scope="col">Nama Kapal</th>
+                                <th class="text-center" scope="col">Jenis Kapal</th>
+                                <th class="text-center" scope="col">Ukuran</th>
+                                @if (auth()->user()->level == 'administrator')
                                     <th class="text-center" scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kapal as $index => $data)
                                 <tr>
-                                    <th class="text-center" scope="row">1</th>
-                                    <td class="text-center">Iqbal Ramadhan</td>
-                                    <td class="text-center">Kapal Laut</td>
-                                    <td class="text-center">Titanic</td>
-                                    <td class="text-center">1000M<sup>2</sup></td>
-                                    <td class="text-center"><button
-                                            class="btn p-1 m-1 btn-warning">Edit</button><button
-                                            class="btn p-1 m-1 btn-danger">Hapus</button></td>
-
+                                    <th scope="col" class="text-center">{{ $index + 1 }}.</th>
+                                    <td scope="col" class="text-center">{{ $data->wajibRetribusi->nama ?? 'N/A' }}
+                                    </td>
+                                    <td scope="col" class="text-center">{{ $data->nama_kapal }}</td>
+                                    <td scope="col" class="text-center">
+                                        {{ $data->jenisKapal->jenis_kapal ?? 'N/A' }}</td>
+                                    <td scope="col" class="text-center">{{ $data->ukuran }}</td>
+                                    @if (auth()->user()->level == 'administrator')
+                                        <td class="text-center">
+                                            <a href="{{ route('KapalWajibRetribusi.edit', $data->id) }}" class="btn p-1 m-1 btn-warning">Edit</a>
+                                            <form action="{{ route('KapalWajibRetribusi.destroy', $data->id) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                            </td>
+                                    @endif
                                 </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            @endif
-            @if (auth()->user()->level == 'wajibretribusi')
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Line Chart</h6>
-                                <canvas id="line-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Line Chart</h6>
-                                <canvas id="salse-revenue" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Bar Chart</h6>
-                                <canvas id="bar-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Bar Chart</h6>
-                                <canvas id="worldwide-sales" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Pie Chart</h6>
-                                <canvas id="pie-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Doughnut Chart</h6>
-                                <canvas id="doughnut-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+            </div>
 
             <!-- Recent Sales End -->
 

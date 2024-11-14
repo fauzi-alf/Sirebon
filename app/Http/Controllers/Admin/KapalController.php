@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kapal;
+use App\Models\RefJenisKapal;
+use App\Models\WajibRetribusi;
 use Illuminate\Http\Request;
 
 class KapalController extends Controller
@@ -12,7 +15,8 @@ class KapalController extends Controller
      */
     public function index()
     {
-        //
+        $kapal = Kapal::with('wajibRetribusi')->get();
+        return view ('admin.kapalWajibRetribusi', compact('kapal'));
     }
 
     /**
@@ -20,7 +24,9 @@ class KapalController extends Controller
      */
     public function create()
     {
-        //
+        $jeniskapal = RefJenisKapal::all();
+        $pemilikKapal = WajibRetribusi::all();
+        return view('admin.kapal.create', compact('jeniskapal','pemilikKapal'));
     }
 
     /**
@@ -28,7 +34,24 @@ class KapalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_kapal' => 'required|string|max:50',
+        'id_jenis_kapal' => 'required|exists:ref_jenis_kapal,id',
+        'ukuran' => 'required|string|max:50',
+        'id_wajib_retribusi' => 'required|exists:wajib_retribusi,id',
+
+        ]);
+        $wajibRetribusi = WajibRetribusi::find($request->id_wajib_retribusi);
+        Kapal::create([
+            'id_user' => auth()->id(),
+            'id_wajib_retribusi' => $wajibRetribusi->id,
+            'nama_pemilik' => $wajibRetribusi->nama,
+            'nama_kapal' => $request->nama_kapal,
+            'id_jenis_kapal' => $request->id_jenis_kapal,
+            'ukuran' => $request->ukuran,
+        ]);
+    
+        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +67,10 @@ class KapalController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kapal = Kapal::findOrFail($id);
+        $jeniskapal = RefJenisKapal::all();
+        $pemilikKapal = WajibRetribusi::all();
+        return view('admin.kapal.edit', compact('kapal', 'jeniskapal', 'pemilikKapal'));
     }
 
     /**
@@ -52,7 +78,17 @@ class KapalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_kapal' => 'required|string|max:50',
+            'id_jenis_kapal' => 'required|exists:ref_jenis_kapal,id',
+            'ukuran' => 'required|string|max:50',
+            'id_wajib_retribusi' => 'required|exists:wajib_retribusi,id',
+        ]);
+
+        $kapal = Kapal::findOrFail($id);
+        $kapal->update($request->all());
+
+        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data kapal berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +96,8 @@ class KapalController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kapal = Kapal::findOrFail($id);
+        $kapal->delete();
+        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data kapal berhasil dihapus.');
     }
 }
