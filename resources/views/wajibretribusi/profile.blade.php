@@ -125,7 +125,7 @@
                         </div>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -133,7 +133,7 @@
                             Laporan</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
 
@@ -220,35 +220,35 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">NIK</label>
-                                <input type="email" class="form-control" value="45678654" id="exampleInputEmail1"
+                                <input type="text" class="form-control" value="45678654" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Telepon</label>
-                                <input type="email" class="form-control" value="082345678987"
+                                <input type="text" class="form-control" value="082345678987"
                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
-                                <input type="email" class="form-control" value="{{ auth()->user()->level }}"
+                                <input type="text" class="form-control" value="{{ auth()->user()->level }}"
                                     id="exampleInputEmail1" aria-describedby="emailHelp">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                                <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1"
+                                <input type="text" class="form-control" value="Iqbal" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                <input type="email" class="form-control" value="bondet" id="exampleInputEmail1"
+                                <input type="text" class="form-control" value="bondet" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}

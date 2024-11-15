@@ -94,7 +94,8 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link"><i
+                                class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -125,7 +126,7 @@
                         </div>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -133,7 +134,7 @@
                             Laporan</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
 
@@ -202,11 +203,11 @@
 
 
             {{-- <!-- Recent Sales Start --> Content isi web --}}
-                @session('success')
+            @session('success')
                 <div class="text-center m-2 p-2 alert alert-success">
                     Login Berhasil
                 </div>
-                @endsession
+            @endsession
             @if (auth()->user()->level == 'administrator')
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-4">
@@ -241,88 +242,7 @@
                 </div>
             @endif
 
-            @if (auth()->user()->level == 'wajibretribusi')
-                <div class="col-sm-12 col-xl-12 mt-3">
-                    <div class="bg-light rounded h-100 p-4 m-1">
-                        <h6 class="mb-4">Profil</h6>
-                        <form>
-                            @csrf
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" value="{{ auth()->user()->email }}"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">NIK</label>
-                                <input type="email" class="form-control" value="45678654" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Telepon</label>
-                                <input type="email" class="form-control" value="082345678987"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
-                                <input type="email" class="form-control" value="{{ auth()->user()->level }}"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                                <input type="email" class="form-control" value="Iqbal" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                <input type="email" class="form-control" value="bondet" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
-                    </div>
-
-
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Password</h6>
-                        {{-- video orang india 5:14 --}}
-                        <form method="post" action="{{ url('change-password') }}" id="updatePasswordForm">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="namapwlama" class="form-label">Password Lama</label>
-                                <input type="password" class="form-control" name="old_password" id="pwlama">
-                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="namapwbaru" class="form-label">Password Baru</label>
-                                <input type="password" class="form-control" name="new_passsword" id="pwbaru">
-                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control"name="confirm_password" id="pwconfirm">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
-                    </div>
-                </div>
-            @endif
+             
 
             <!-- Recent Sales End -->
 

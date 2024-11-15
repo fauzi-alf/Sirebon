@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\KapalController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\WajibRetribusiController;
-use App\Http\Controllers\Retribusi\RetribusiController;
+use App\Http\Controllers\Retribusi\ProfileController;
 
 
 use App\Http\Controllers\LoginController;
@@ -100,13 +100,19 @@ Route::post('/reset-password', function (Request $request) {
 Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']], function () {
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/Home', function () {
-        return view('home');
-    })->name('home');
+    // Route::get('/Home', function () {
+    //     return view('home');
+    // })->name('home');
+   
+    // Route::get('Profile', [LoginController::class, 'index'])->name('Profile');
+    // Route::get('Profile', '\App\Http\Controllers\Retribusi\ProfileController@index')->name('Profile');
+    Route::get('Home', [LoginController::class, 'index'])->name('Home');
+    // Route::resource('Profile', ProfileController::class);
+    Route::get('Profile', [ProfileController::class,'index'])->name('Profile');
+    // Route::resource('/Profile', ProfileController::class); 
 
     // Route::resource('KategoriRetribusi', KategoriRetribusiController::class);
-    Route::resource('KapalWajibRetribusi', KapalController::class);
-    Route::resource('Profile', RetribusiController::class);
+    Route::resource('KapalWajibRetribusi', KapalController::class); 
     Route::resource('KategoriRetribusi', KategoriController::class);
     Route::resource('RekeningPembayaranRetribusi', RekeningController::class);
     Route::resource('WajibRetribusi', WajibRetribusiController::class);

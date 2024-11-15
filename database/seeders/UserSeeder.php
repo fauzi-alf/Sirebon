@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'level' => 'administrator',
             'email' => 'administrator@gmail.com',
             'password' => bcrypt('admin123'),
+            'id_user_group' => 1,
             'remember_token' => Str::random(60),
         ]);
         User::create([
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             'level' => 'wajibretribusi',
             'email' => 'wajibretribusi@gmail.com',
             'password' => bcrypt('retribusi123'),
+            'id_user_group' => 2,
             'remember_token' => Str::random(60),
         ]);
 

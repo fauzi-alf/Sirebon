@@ -125,7 +125,7 @@
                         </div>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
 
@@ -134,7 +134,7 @@
                             Laporan</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
+                        <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
 

@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+    public function index()
+    {
+        return view('home');
+    }
+    public function indexpro()
+    {
+        return view('wajibretribusi.profile');
+
+    }
     public function halamanlogin(){
         return view('login.login-form');
        }
@@ -16,10 +26,12 @@ class LoginController extends Controller
     
        public function postlogin(Request $request){
         if(Auth::attempt($request->only('username','password'))){
-           
-            
+            $user = Auth::user();
+            return $user->level == 'administrator' 
+            ? redirect()->route('Home') 
+            : redirect()->route('Profile');
             // session()->flash('login_success');
-            return redirect('/Home')->with('success', 'Berhasil Login');
+            // return redirect('/Home')->with('success', 'Berhasil Login');
             
         }
         return redirect('/')->with('failedd', 'Username Atau Password Salah ');
