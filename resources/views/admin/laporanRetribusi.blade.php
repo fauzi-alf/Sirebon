@@ -207,10 +207,19 @@
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Kapal Wajib Retribusi</h6>
-                    
-                    <form class="d-none d-md-flex col-2">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form>
+                    <div class="row">
+                        <div class="col-10">
+
+                            <form class="d-none d-md-flex col-3">
+                                <input class="form-control border-0" type="search" placeholder="Search">
+                            </form>
+                        </div>
+                        <div class="col-2">
+                            <button onclick="window.print()" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </button>
+
+                        </div>
+
+                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>

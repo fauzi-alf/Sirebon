@@ -93,7 +93,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('/WajibRetribusi') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
