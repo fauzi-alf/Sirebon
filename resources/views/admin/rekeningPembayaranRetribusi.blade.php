@@ -52,7 +52,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
 
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="{{ url('/Home') }}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img class="rounded-circle" src="{{ url('asset/img/klrrR.png') }} "
                             alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>

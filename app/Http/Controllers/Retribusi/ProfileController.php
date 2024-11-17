@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Retribusi;
 
 use App\Http\Controllers\Controller;
+use App\Models\WajibRetribusi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -12,7 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view ('wajibretribusi.profile');
+        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
+        return view ('wajibretribusi.profile',compact('wajibRetribusi'));
     }
 
     /**
@@ -52,7 +55,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**

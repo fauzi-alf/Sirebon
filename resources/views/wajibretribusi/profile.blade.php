@@ -52,7 +52,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
 
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="{{ url('/Profile') }}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img class="rounded-circle" src="{{ url('asset/img/klrrR.png') }} "
                             alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
                 </a>
@@ -147,7 +147,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="{{ url('/Profile') }}" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -208,52 +208,61 @@
             @if (auth()->user()->level == 'wajibretribusi')
                 <div class="col-sm-12 col-xl-12 mt-3">
                     <div class="bg-light rounded h-100 p-4 m-1">
-                        <h6 class="mb-4">Profil</h6>
-                        <form>
+                        <h6 class="mb-4">Profile</h6>
+                        <form action="" method="post">
                             @csrf
+                            @method('PUT')
+                            @foreach ($wajibRetribusi as $data )
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <label for="namalengkap" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" value="{{$data->nama}}" id="namalengkap"
+                                    aria-describedby="namalengkap">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="usename" class="form-label">Username</label>
+                                <input type="text" class="form-control" value="{{ auth()->user()->username }}"
+                                    id="username" aria-describedby="username">
+                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                            </div> --}}
+                            </div>
+                            {{-- <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email </label>
                                 <input type="email" class="form-control" value="{{ auth()->user()->email }}"
                                     id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div> --}}
+                            <div class="mb-3">
+                                <label for="hakakses" class="form-label">Hak Akses</label>
+                                <input type="text" class="form-control " value="{{ auth()->user()->level }}"
+                                    id="hakakses" aria-describedby="hakakses" disabled>
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">NIK</label>
-                                <input type="text" class="form-control" value="45678654" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
+                                <label for="nik" class="form-label">NIK</label>
+                                <input type="text" class="form-control" value="{{$data->nik}}" id="nik"
+                                    aria-describedby="nik">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Telepon</label>
-                                <input type="text" class="form-control" value="082345678987"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label for="telepon" class="form-label">Telepon</label>
+                                <input type="text" class="form-control" value="{{$data->no_hp}}"
+                                    id="telepon" aria-describedby="telepon">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Hak Akses</label>
-                                <input type="text" class="form-control" value="{{ auth()->user()->level }}"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <input type="text" class="form-control" value="{{$data->alamat}}" id="alamat"
+                                    aria-describedby="alamat">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" value="Iqbal" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" value="bondet" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>    
+                            @endforeach
+                            
                         </form>
                     </div>
 
