@@ -83,7 +83,7 @@
                                     <option value="A" {{ $wajibretribusi->status == 'A' ? 'selected' : '' }}>A - Aktif</option>
                                     <option value="B" {{ $wajibretribusi->status == 'B' ? 'selected' : '' }}>B - Tidak Aktif</option>
                                 </select> 
-                                <label for="floatingInput">Kelurahan </label>
+                                <label for="floatingInput">Status </label>
                             </div>
 
                             <button class="btn btn-primary btn-sm p-1" type="submit">Simpan</button>

@@ -22,7 +22,9 @@ use App\Http\Controllers\WajibRetribusiNoCRUDController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranRetribusiController;
 use App\Http\Controllers\KonfirmasiRetribusiController;
-use App\Http\Controllers\LaporanAdminController; 
+use App\Http\Controllers\LaporanAdminController;
+use App\Models\WajibRetribusi;
+
 // use App\Http\Controllers\RekeningPembayaranRetribusiController;
 // use App\Http\Controllers\GantiPasswordController;
 
@@ -110,7 +112,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
     Route::post('Profile', [ProfileController::class,'update'])->name('UpdateProfile');
     // Route::resource('/Profile', ProfileController::class); 
 
-    // Route::resource('KategoriRetribusi', KategoriRetribusiController::class);
+    // Route::resource('KategoriRetribusi', KategoriRetribusiController::class); 
     Route::resource('KapalWajibRetribusi', KapalController::class); 
     Route::resource('KategoriRetribusi', KategoriController::class);
     Route::resource('RekeningPembayaranRetribusi', RekeningController::class);

@@ -228,14 +228,15 @@
                         <div class=" text-center m-2 p-2 alert alert-danger">
                             Data gagal di edit/tambah
                         </div>
-                    @endsession
-
+                    @endsession 
                     <a href="{{ route('WajibRetribusi.create') }}" class="btn btn-primary rounded-pill m-2"><i
-                            class='bx bx-plus-medical'></i> Tambah Data </a>
-                    @if (auth()->user()->level == 'administrator')
-                        <form class="d-none d-md-flex col-2">
-                            <input class="form-control border-0" type="search" placeholder="Search">
-                        </form>
+                        class='bx bx-plus-medical'></i> Tambah Data </a> 
+                        @if (auth()->user()->level == 'administrator') 
+                                <form class="d-none d-md-flex col-2" action="" method="GET">
+                                    <input class="form-control border-0" type="search" placeholder="Search">
+                                    <button class="btn btn-primary rounded-pill" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </form>
+    
 
                         <table class="table table-striped">
                             <thead>

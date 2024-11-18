@@ -207,7 +207,7 @@
             @if (auth()->user()->level == 'wajibretribusi')
             <div class="col-sm-12 col-xl-11 mt-3 "> 
                     <div class="bg-light rounded h-100 p-4 m-1">
-                        <h6 class="mb-4">Profil</h6>
+                        <h6 class="mb-4">Konfirmasi  Pembayaran</h6>
                         <form>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Jenis Bank</label>

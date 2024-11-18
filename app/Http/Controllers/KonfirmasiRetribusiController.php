@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Kapal;
+use App\Models\KonfirmasiBayar;
+use App\Models\MsRekening;
+use App\Models\RefBank;
+use App\Models\RefJenisKapal;
+use App\Models\WajibRetribusi;
 use Illuminate\Http\Request;
-
 class KonfirmasiRetribusiController extends Controller
 {
     /**
@@ -11,6 +15,8 @@ class KonfirmasiRetribusiController extends Controller
      */
     public function index()
     {
+        
+
         return view('wajibretribusi.konfirmasiPembayaranRetribusi');
     }
 
@@ -19,7 +25,7 @@ class KonfirmasiRetribusiController extends Controller
      */
     public function create()
     {
-        //
+     //
     }
 
     /**
