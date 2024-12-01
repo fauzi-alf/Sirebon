@@ -61,7 +61,7 @@
                 </div>
                 <div class="navbar-nav w-100 p-2">
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/Home') }} " class="nav-item nav-link active "> <i
+                        <a href="{{ url('/Home') }} " class="nav-item nav-link  "> <i
                                 class="fa-brands fa-fort-awesome-alt"></i>
                             Beranda Admin </a>
                     @endif
@@ -81,7 +81,7 @@
                             Pembayaran Retribusi</a>
                     @endif
                     @if (auth()->user()->level == 'administrator')
-                        <a href="{{ url('/PembayaranRetribusi') }}" class="nav-item nav-link"><i
+                        <a href="{{ url('/PembayaranRetribusi') }}" class="nav-item nav-link active"><i
                                 class="fa-solid fa-money-check-dollar"></i>
                             Pembayaran Retribusi</a>
                     @endif
@@ -204,41 +204,64 @@
             {{-- <!-- Recent Sales Start --> Content isi web --}}
 
             
-            @if (auth()->user()->level == 'wajibretribusi')
             <div class="col-sm-12 col-xl-11 mt-3 "> 
                     <div class="bg-light rounded h-100 p-4 m-1">
-                        <h6 class="mb-4">Konfirmasi  Pembayaran</h6>
-                        <form>
+                        <h6 class="mb-4">Konfirmasi  Pembayaran Retribusi</h6>
+                        
+                    @session('success')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Tambah 
+                    </div>
+                @endsession
+                @session('edit')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Edit 
+                    </div>
+                @endsession
+                @session('hapus')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data Berhasil Dihapus
+                    </div>
+                @endsession
+                        <form method="POST" action="{{route('PembayaranRetribusi.store')}}">
+                            @csrf
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Jenis Bank</label>
-                                <input type="text" class="form-control" value="Pilih" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label for="JenisBank" class="form-label">Jenis Bank</label>
+                                <select name="id_ref_bank" class="form-select" id="choices">
+                                    @foreach ($banks as $bank)
+                                        <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rek" class="form-label">Nomor rekening</label>
+                                <input type="text" name="no_rekening" class="form-control"  id="NomorRekening" required>
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nomor rekening</label>
-                                <input type="text" class="form-control" value="45678654" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label  class="form-label">Nama Pemilik Rekening</label>
+                                <input type="text" class="form-control" name="nama_pemilik_rekening" id="pemilik_rekening" required>
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nominal Transfer</label>
-                                <input type="text" class="form-control" value="10.000.000" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label  class="form-label">Nominal Transfer</label>
+                                <input type="number" class="form-control" name="biaya_retribusi" id="biaya_retribusi" value="{{ $biayaRetribusi }}" readonly >
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div> --}}
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Bukti Pembayaran</label>
-                                <input type="file" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label  class="form-label">Bukti Pembayaran</label>
+                                <input type="file" class="form-control" name="file_bukti"  id="BuktiBayar" >
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div> --}}
                             </div>
                              
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
                         </form>
                     </div>
             </div> 
-            @endif
 
             <!-- Recent Sales End -->
 

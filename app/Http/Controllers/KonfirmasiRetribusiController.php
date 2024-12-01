@@ -15,9 +15,25 @@ class KonfirmasiRetribusiController extends Controller
      */
     public function index()
     {
-        
+        $userId = auth()->id();
 
-        return view('wajibretribusi.konfirmasiPembayaranRetribusi');
+        // Cari data wajib retribusi yang terkait dengan user yang login
+        $wajibRetribusi = WajibRetribusi::where('id_user', $userId)->first();
+
+        // Pastikan data wajib retribusi ditemukan
+        if ($wajibRetribusi) {
+            // Cari data kapal yang terkait dengan wajib retribusi ini
+            $kapal = Kapal::where('id_wajib_retribusi', $wajibRetribusi->id)->first();
+
+            // Ambil biaya retribusi dari jenis kapal yang terkait dengan kapal ini
+            $biayaRetribusi = $kapal ? RefJenisKapal::where('id', $kapal->id_jenis_kapal)->value('biaya_retribusi') : 0;
+        } else {
+            $biayaRetribusi = 0;
+        }
+
+        $banks = RefBank::all(); 
+
+        return view('wajibretribusi.konfirmasiPembayaranRetribusi', compact('biayaRetribusi', 'banks'));
     }
 
     /**

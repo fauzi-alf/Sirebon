@@ -17,6 +17,14 @@ class LaporanAdminController extends Controller
     {
        return view('admin.laporanRetribusi');
     }
+    public function laporanblm()
+    {
+       return view('admin.cetaklaporanblm');
+    }
+    public function laporansdh()
+    {
+       return view('admin.cetaklaporansdh');
+    }
 
     /**
      * Show the form for creating a new resource.

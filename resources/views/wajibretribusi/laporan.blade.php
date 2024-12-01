@@ -214,7 +214,7 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <button onclick="window.print()" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </button>
+                            <a href="{{route('CetakLaporan')}}" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </a>
 
                         </div>
 

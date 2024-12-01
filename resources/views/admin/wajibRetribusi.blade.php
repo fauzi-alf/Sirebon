@@ -207,7 +207,12 @@
 
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
+                    @if (auth()->user()->level == 'administrator') 
                     <h6 class="mb-4">Wajib retribusi</h6>
+                    @endif
+                    @if (auth()->user()->level == 'wajibretribusi') 
+                    <h6 class="mb-4">Kapalku</h6>
+                    @endif
 
                     @session('success')
                         <div class="text-center m-2 p-2 alert alert-success">
@@ -234,7 +239,8 @@
                         @if (auth()->user()->level == 'administrator') 
                                 <form class="d-none d-md-flex col-2" action="" method="GET">
                                     <input class="form-control border-0" type="search" placeholder="Search">
-                                    <button class="btn btn-primary rounded-pill" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    <button class="btn btn-primary rounded-pill" type="submit"></button>
+                                    {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
                                 </form>
     
 

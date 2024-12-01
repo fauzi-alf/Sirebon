@@ -15,6 +15,11 @@ class ProfileController extends Controller
     public function index()
     {
         $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
+        // $user = session('user');
+
+    // Ambil data 'nama' dari relasi wajibretribusi
+    // $nama = $user->wajibretribusi->nama ?? 'Nama tidak tersedia'; ,'user','nama'
+
         return view ('wajibretribusi.profile',compact('wajibRetribusi'));
     }
 
@@ -55,7 +60,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+         
     }
 
     /**

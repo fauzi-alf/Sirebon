@@ -43,7 +43,7 @@
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <div class="remember-forgot">
-                <a href="{{ url('/forgot-password') }}">Lupa Password</a>
+                <a href="{{ url('/forgot-password') }}">Lupa Password?</a>
             </div>
             <button type="submit" class="btn">LOGIN</button>
         </form>

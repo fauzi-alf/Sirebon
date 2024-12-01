@@ -207,7 +207,7 @@
                 <div class="col-sm-12 col-xl-11 mt-3">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Pembayaran Retribusi</h6>
-                        <a href="#" type="button" class="btn btn-primary rounded-pill m-2"><i
+                        <a href="{{route('KonfirmasiPembayaranretribusi.index')}}" type="button" class="btn btn-primary rounded-pill m-2"><i
                                 class='bx bx-plus-medical'></i> Tambah Data </a>
                         <form class="d-none d-md-flex col-2">
                             <input class="form-control border-0" type="search" placeholder="Search">
@@ -226,20 +226,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($pembayaran as $data)
                                 <tr>
-                                    <th class="text-center" scope="row">1</th>
-                                    <td class="text-center">Iqbal Ramadhan</td>
-                                    <td class="text-center">0898765432</td>
-                                    <td class="text-center">Foto</td>
-                                    <td class="text-center">45678</td>
-                                    <td class="text-center">15 Oktober 2024</td>
-                                    <td class="text-center">Atmin</td>
-                                    <td class="text-center"><button
-                                            class="btn p-1 m-1 btn-success">Terima</button><button
-                                            class="btn p-1 m-1 btn-danger">Tolak</button></td>
-
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $data->nama_pemilik_rekening }}</td>
+                                <td class="text-center">{{ $data->no_rekening }}</td>
+                                <td class="text-center">
+                                  <img src="{{ asset('bukti_pembayaran/' . $data->file_bukti) }}" alt="{{ $data->title }}" class="rounded" style="width: 100px">
+                                </td>
+                                <td class="text-center">{{ $data->created_at->format('d-m-Y') }}</td>
+                                <td class="text-center">{{ $data->tanggal_tindak_lanjut ?? 'Belum Ditindak' }}</td>
+                                <td class="text-center">{{ $data->tindak_lanjut_user ?? 'Belum Ada' }}</td>
+                                <td class="text-center">
+                                    <a href="" class="btn btn-success btn-sm m-1">Sesuai</a>
+                                    <a href="" class="btn btn-danger btn-sm m-1">Tidak Sesuai</a>
+                                </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

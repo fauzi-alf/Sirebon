@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KapalController;
-use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\WajibRetribusiController;
 use App\Http\Controllers\Retribusi\ProfileController;
+use App\Http\Controllers\AppController;
 
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\WajibRetribusiNoCRUDController; 
-use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranRetribusiController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WajibRetribusiNoCRUDController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KonfirmasiRetribusiController;
 use App\Http\Controllers\LaporanAdminController;
 use App\Models\WajibRetribusi;
@@ -50,6 +50,7 @@ Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
+ 
 
 
 Route::post('/forgot-password', function (Request $request) {
@@ -91,11 +92,11 @@ Route::post('/reset-password', function (Request $request) {
         }
     );
     return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('rs-completed','Reset Password Berhasil, Silahkan Login')
+        ? redirect()->route('login')->with('rs-completed', 'Reset Password Berhasil, Silahkan Login')
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
- 
+
 
 
 
@@ -105,25 +106,32 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
     // Route::get('/Home', function () {
     //     return view('home');
     // })->name('home');
-    
+
     // Route::resource('Profile', ProfileController::class);
     Route::get('Home', [LoginController::class, 'index'])->name('Home');
-    Route::get('Profile', [ProfileController::class,'index'])->name('Profile');
-    Route::post('Profile', [ProfileController::class,'update'])->name('UpdateProfile');
+    // Route::get('Profile', [ProfileController::class,'index'])->name('Profile');
+    // Route::post('Profile', [ProfileController::class,'update'])->name('UpdateProfile');
     // Route::resource('/Profile', ProfileController::class); 
 
     // Route::resource('KategoriRetribusi', KategoriRetribusiController::class); 
-    Route::resource('KapalWajibRetribusi', KapalController::class); 
+    Route::post('/change-password', [AppController::class, 'updatePassword'])->name('GantiPassword');
+    Route::resource('Profile', ProfileController::class);
+    Route::resource('KapalWajibRetribusi', KapalController::class);
     Route::resource('KategoriRetribusi', KategoriController::class);
     Route::resource('RekeningPembayaranRetribusi', RekeningController::class);
     Route::resource('WajibRetribusi', WajibRetribusiController::class);
+    Route::resource('PembayaranRetribusi', PembayaranRetribusiController::class);
+    Route::resource('KonfirmasiPembayaranretribusi', KonfirmasiRetribusiController::class);
     Route::get('/LaporanBlmBayar', [LaporanAdminController::class, 'index'])->name('LaporanBlmBayar');
+    Route::get('/CetakLaporanSdhBayar', [LaporanAdminController::class, 'laporansdh'])->name('CetakLaporanSdhBayar');
+    Route::get('/CetakLaporanBlmBayar', [LaporanAdminController::class, 'laporanblm'])->name('CetakLaporanBlmBayar');
     Route::get('/Laporan', [WajibRetribusiNoCRUDController::class, 'index'])->name('Laporan');
-    Route::get('/PembayaranRetribusi', [PembayaranRetribusiController::class, 'index'])->name('PembayaranRetrisbusi');
-    Route::get('/KonfirmasiPembayaranretribusi', [KonfirmasiRetribusiController::class, 'index'])->name('KonfirmasiPembayaranRetribusi');
+    Route::get('/CetakLaporan', [WajibRetribusiNoCRUDController::class, 'index1'])->name('CetakLaporan');
     Route::get('/LaporanRetribusi', [LaporanAdminController::class, 'index2'])->name('LaporanRetribusi');
-    
-    
+    // Route::get('/KonfirmasiPembayaranretribusi', [KonfirmasiRetribusiController::class, 'index'])->name('KonfirmasiPembayaranRetribusi');
+    // Route::get('/PembayaranRetribusi', [PembayaranRetribusiController::class, 'index'])->name('PembayaranRetrisbusi');
+
+
     // Route::get('/KapalWajibRetribusi', [KapalController::class, 'index'])->name('kapalWajibRetribusi');
     // Route::get('/Kapalku', [KapalkuController::class, 'index'])->name('Kapalku');
     // Route::get('/Profile', [ProfileController::class, 'index'])->name('Profile');

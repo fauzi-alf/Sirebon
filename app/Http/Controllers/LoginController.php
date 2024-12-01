@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 // use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\User;
 class LoginController extends Controller
 {
 
@@ -26,10 +26,15 @@ class LoginController extends Controller
     
        public function postlogin(Request $request){
         if(Auth::attempt($request->only('username','password'))){
+            // $userr = User::with('wajibretribusi')->find(Auth::id());
+// 
+            // Simpan data user ke session
+            // session(['user' => $userr]);
+
             $user = Auth::user();
             return $user->level == 'administrator' 
             ? redirect()->route('Home') 
-            : redirect()->route('Profile');
+            : redirect()->route('Profile.index');
             // session()->flash('login_success');
             // return redirect('/Home')->with('success', 'Berhasil Login');
             

@@ -205,7 +205,7 @@
 
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Kapal Wajib Retribusi</h6>
+                    <h6 class="mb-4">Laporan Kapal Wajib Retribusi Sudah Bayar</h6>
                     <div class="row">
                         <div class="col-10">
 
@@ -214,7 +214,7 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <button onclick="window.print()" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </button>
+                            <a href="{{route('CetakLaporanSdhBayar')}}" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </a>
 
                         </div>
 

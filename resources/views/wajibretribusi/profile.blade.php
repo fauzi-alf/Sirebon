@@ -208,6 +208,7 @@
                 <div class="col-sm-12 col-xl-12 mt-3">
                     <div class="bg-light rounded h-100 p-4 m-1">
                         <h6 class="mb-4">Profile</h6>
+                         
                         <form action="" method="post">
                             @csrf
                             @method('PUT')
@@ -269,7 +270,7 @@
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Password</h6>
                         {{-- video orang india 5:14 --}}
-                        <form method="post" action="{{ url('change-password') }}" id="updatePasswordForm">
+                        <form method="post" action="{{route('GantiPassword')}}" id="updatePasswordForm">
                             @csrf
                             <div class="mb-3">
                                 <label for="namapwlama" class="form-label">Password Lama</label>
@@ -285,7 +286,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control"name="confirm_password" id="pwconfirm">
+                                <input type="password" class="form-control"name="new_password_confirmation" id="pwconfirm">
                                 {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                             </div> --}}
                             </div>
