@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Sirebon</title>
+    <title>Sirepal</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -54,7 +54,7 @@
 
                 <a href="{{ url('/Profile') }}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img class="rounded-circle" src="{{ url('asset/img/klrrR.png') }} "
-                            alt="" style="width: 60px; height: 60px;"></box-icon> Sirebon</h3>
+                            alt="" style="width: 60px; height: 60px;"></box-icon> Sirepal</h3>
                 </a>
                 <div class="d-flex align-items-center    ms-4 mb-4">
 
@@ -272,7 +272,7 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika 
+                            2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.
                         </div>
                        
                     </div>

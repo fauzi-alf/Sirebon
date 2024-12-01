@@ -18,7 +18,7 @@
         <form method="post" action="{{ route('postlogin') }}">
             @csrf
             <img style="height:256px ; width:256px;" src="{{ url('asset/img/klrrR.png') }}" class="logo">
-            <h1 class="text-primary"> Login Sirebon </h1>
+            <h1 class="text-primary"> Login Sirepal </h1>
             @session('success')
                 <div class="alert alert-success p-2 m-2">
                     Berhasil Logout

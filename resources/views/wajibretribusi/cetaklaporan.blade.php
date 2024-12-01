@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Sirebon</title>
+    <title>Sirepal</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -93,7 +93,7 @@
             <div class="bg-light rounded-top p-4">
                 <div class="row">
                     <div class="col-12 col-sm-6 text-center text-sm-start">
-                        &copy; <a href="#">Sirebon</a> 2024, Dinas Komuikasi Informatika dan Statistika
+                        2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.
                     </div>
 
                 </div>
