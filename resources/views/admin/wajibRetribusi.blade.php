@@ -238,12 +238,12 @@
                         class='bx bx-plus-medical'></i> Tambah Data </a> 
                         @if (auth()->user()->level == 'administrator') 
                                 <form class="d-none d-md-flex col-2" action="" method="GET">
-                                    <input class="form-control border-0" type="search" placeholder="Search"> 
+                                    <input class="form-control border-0" type="search" id="searchInput" placeholder="Search"> 
                                     {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
                                 </form>
     
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">No.</th>
@@ -323,6 +323,34 @@
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('#dataTable tbody tr');
+        
+            searchInput.addEventListener('input', function() {
+                const filter = searchInput.value.toLowerCase();
+        
+                tableRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let match = false;
+        
+                    cells.forEach(cell => {
+                        if (cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                        }
+                    });
+        
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    
+        </script>
 </body>
 
 </html>

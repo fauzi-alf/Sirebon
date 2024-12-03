@@ -230,9 +230,9 @@
                         <a href="{{route('RekeningPembayaranRetribusi.create')}}"  class="btn btn-primary rounded-pill m-2"><i
                                 class='bx bx-plus-medical'></i> Tambah Data </a>
                         <form class="d-none d-md-flex col-2">
-                            <input class="form-control border-0" type="search" placeholder="Search">
+                            <input class="form-control border-0" type="search" id="searchInput" placeholder="Search">
                         </form>
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">No.</th>
@@ -270,54 +270,7 @@
                     </div>
                 </div>
             @endif
-            @if (auth()->user()->level == 'wajibretribusi')
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Line Chart</h6>
-                                <canvas id="line-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Line Chart</h6>
-                                <canvas id="salse-revenue" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Single Bar Chart</h6>
-                                <canvas id="bar-chart" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Multiple Bar Chart</h6>
-                                <canvas id="worldwide-sales" width="526" height="262"
-                                    style="display: block; box-sizing: border-box; height: 209.6px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Pie Chart</h6>
-                                <canvas id="pie-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Doughnut Chart</h6>
-                                <canvas id="doughnut-chart" width="526" height="526"
-                                    style="display: block; box-sizing: border-box; height: 420.8px; width: 420.8px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
+             
 
             <!-- Recent Sales End -->
 
@@ -356,6 +309,34 @@
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('#dataTable tbody tr');
+        
+            searchInput.addEventListener('input', function() {
+                const filter = searchInput.value.toLowerCase();
+        
+                tableRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let match = false;
+        
+                    cells.forEach(cell => {
+                        if (cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                        }
+                    });
+        
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    
+        </script>
 </body>
 
 </html>
