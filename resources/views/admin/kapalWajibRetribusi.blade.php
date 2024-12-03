@@ -206,6 +206,28 @@
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Kapal Wajib Retribusi</h6>
+                    
+                    @session('success')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Tambah 
+                    </div>
+                @endsession
+                @session('edit')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Edit 
+                    </div>
+                @endsession
+                @session('hapus')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data Berhasil Dihapus
+                    </div>
+                @endsession
+                @session('error')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data gagal di edit/tambah
+                    </div>
+                @endsession 
+
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ route('KapalWajibRetribusi.create') }}"
                             class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data

@@ -209,15 +209,35 @@
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Kategori Retribusi</h6>
+                    @session('success')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Tambah 
+                    </div>
+                @endsession
+                @session('edit')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Edit 
+                    </div>
+                @endsession
+                @session('hapus')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data Berhasil Dihapus
+                    </div>
+                @endsession
+                @session('error')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data gagal di edit/tambah
+                    </div>
+                @endsession 
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ route('KategoriRetribusi.create') }}" type="button"
                             class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data
                         </a>
                     @endif
                     <form class="d-none d-md-flex col-2">
-                        <input class="form-control border-0" type="search" placeholder="Search">
+                        <input class="form-control border-0" type="search" id="searchInput"placeholder="Search">
                     </form>
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="dataTable">
                         <thead>
                             <tr>
                                 <th class="text-center" scope="col">No.</th>
@@ -291,6 +311,34 @@
 
     <!-- Template Javascript -->
     <script src=" {{ url('asset/js/main.js') }} "></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const tableRows = document.querySelectorAll('#dataTable tbody tr');
+        
+            searchInput.addEventListener('input', function() {
+                const filter = searchInput.value.toLowerCase();
+        
+                tableRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let match = false;
+        
+                    cells.forEach(cell => {
+                        if (cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                        }
+                    });
+        
+                    if (match) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    
+        </script>
 </body>
 
 </html>

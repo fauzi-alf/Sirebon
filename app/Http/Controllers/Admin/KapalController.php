@@ -51,7 +51,7 @@ class KapalController extends Controller
             'ukuran' => $request->ukuran,
         ]);
     
-        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
+        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data Kapal berhasil ditambahkan.');
     }
 
     /**

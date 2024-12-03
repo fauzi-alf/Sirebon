@@ -238,8 +238,7 @@
                         class='bx bx-plus-medical'></i> Tambah Data </a> 
                         @if (auth()->user()->level == 'administrator') 
                                 <form class="d-none d-md-flex col-2" action="" method="GET">
-                                    <input class="form-control border-0" type="search" placeholder="Search">
-                                    <button class="btn btn-primary rounded-pill" type="submit"></button>
+                                    <input class="form-control border-0" type="search" placeholder="Search"> 
                                     {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
                                 </form>
     
