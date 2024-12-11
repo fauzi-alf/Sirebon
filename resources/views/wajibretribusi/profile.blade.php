@@ -39,12 +39,12 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner"
+        {{-- <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> --}}
         <!-- Spinner End -->
 
 
@@ -209,7 +209,7 @@
                     <div class="bg-light rounded h-100 p-4 m-1">
                         <h6 class="mb-4">Profile</h6>
                          
-                        <form action="" method="post">
+                        <form action="{{route('Profile.update', ['Profile' => Auth::user()->id])}}" method="post">
                             @csrf
                             @method('PUT')
                             @foreach ($wajibRetribusi as $data )
@@ -270,28 +270,27 @@
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Password</h6>
                         {{-- video orang india 5:14 --}}
-                        <form method="post" action="{{route('GantiPassword')}}" id="updatePasswordForm">
+                        @session('pwg')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Password Berhasil Diganti
+                    </div>
+                @endsession
+                        <form method="post" action="{{route('GantiPW')}}" id="updatePasswordForm">
                             @csrf
-                            <div class="mb-3">
-                                <label for="namapwlama" class="form-label">Password Lama</label>
-                                <input type="password" class="form-control" name="old_password" id="pwlama">
-                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
+                            <div class="input-group mb-3">
+                                <input type="password" name="old_password" id="old_password" class="form-control" placeholder="Password Lama">
+                                 
                             </div>
-                            <div class="mb-3">
-                                <label for="namapwbaru" class="form-label">Password Baru</label>
-                                <input type="password" class="form-control" name="new_passsword" id="pwbaru">
-                                {{-- <divname="" id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </divname=> --}}
+                            <div class="input-group mb-3">
+                                <input type="password" name="new_password" id="new_password" class="form-control" placeholder="Password Baru" required>
+                                 
                             </div>
-                            <div class="mb-3">
-                                <label for="namaconfirmpw" class="form-label">Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control"name="new_password_confirmation" id="pwconfirm">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
+                            <div class="input-group mb-3">
+                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Konfirmasi Password Baru" required>
+                                 
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        
+                            <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                         </form>
                     </div>
                 </div>

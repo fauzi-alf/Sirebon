@@ -75,7 +75,7 @@ class RekeningController extends Controller
 
         $rekening->update($request->all());
 
-        return redirect()->route('RekeningPembayaranRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
+        return redirect()->route('RekeningPembayaranRetribusi.index')->with('edit', 'Data rekening berhasil ditambahkan.');
     }
 
     /**

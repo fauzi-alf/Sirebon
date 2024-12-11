@@ -70,7 +70,7 @@ class KategoriController extends Controller
         $kategori = Kategori::findOrFail($id);
         $kategori->update($request->all());
 
-        return redirect()->route('KategoriRetribusi.index')->with('success', 'Data rekening berhasil ditambahkan.');
+        return redirect()->route('KategoriRetribusi.index')->with('edit', 'Data rekening berhasil diedit.');
     }
     /**
      * Remove the specified resource from storage.

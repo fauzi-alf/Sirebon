@@ -17,6 +17,7 @@ use App\Http\Controllers\Retribusi\ProfileController;
 use App\Http\Controllers\AppController;
 
 
+use App\Http\Controllers\Retribusi\GantiPasswordController;
 use App\Http\Controllers\PembayaranRetribusiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WajibRetribusiNoCRUDController;
@@ -102,19 +103,14 @@ Route::post('/reset-password', function (Request $request) {
 
 Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']], function () {
 
+
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    // Route::get('/Home', function () {
-    //     return view('home');
-    // })->name('home');
-
-    // Route::resource('Profile', ProfileController::class);
+    
     Route::get('Home', [LoginController::class, 'index'])->name('Home');
-    // Route::get('Profile', [ProfileController::class,'index'])->name('Profile');
-    // Route::post('Profile', [ProfileController::class,'update'])->name('UpdateProfile');
-    // Route::resource('/Profile', ProfileController::class); 
-
-    // Route::resource('KategoriRetribusi', KategoriRetribusiController::class); 
+     
     Route::post('/change-password', [AppController::class, 'updatePassword'])->name('GantiPassword');
+    Route::post('/Gantipw', [GantiPasswordController::class, 'update'])->name('GantiPW');
+    
     Route::resource('Profile', ProfileController::class);
     Route::resource('KapalWajibRetribusi', KapalController::class);
     Route::resource('KategoriRetribusi', KategoriController::class);
@@ -128,14 +124,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
     Route::get('/Laporan', [WajibRetribusiNoCRUDController::class, 'index'])->name('Laporan');
     Route::get('/CetakLaporan', [WajibRetribusiNoCRUDController::class, 'index1'])->name('CetakLaporan');
     Route::get('/LaporanRetribusi', [LaporanAdminController::class, 'index2'])->name('LaporanRetribusi');
-    // Route::get('/KonfirmasiPembayaranretribusi', [KonfirmasiRetribusiController::class, 'index'])->name('KonfirmasiPembayaranRetribusi');
-    // Route::get('/PembayaranRetribusi', [PembayaranRetribusiController::class, 'index'])->name('PembayaranRetrisbusi');
-
-
-    // Route::get('/KapalWajibRetribusi', [KapalController::class, 'index'])->name('kapalWajibRetribusi');
-    // Route::get('/Kapalku', [KapalkuController::class, 'index'])->name('Kapalku');
-    // Route::get('/Profile', [ProfileController::class, 'index'])->name('Profile');
-    // Route::get('/KategoriRetribusiWR',[KategoriRetribusiController::class,'indexWR'])->name('kategoriRetribusi');
-    // Route::get('/GantiPassword',[GantiPasswordController::class,'gantiPassword'])->name('GantiPassword');
-    // Route::post('/UpdatePassword',[GantiPasswordController::class,'UpdatePassword'])->name('GantiPassword'); 
+     
 });

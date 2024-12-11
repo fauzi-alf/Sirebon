@@ -237,7 +237,7 @@
                                 <tr>
                                     <th class="text-center" scope="col">No.</th>
                                     <th class="text-center" scope="col">Jenis Bank</th>
-                                    <th class="text-center" scope="col">Nma Pemilik</th>
+                                    <th class="text-center" scope="col">Nama Pemilik</th>
                                     <th class="text-center" scope="col">Nomor Rekening</th>
                                     <th class="text-center" scope="col">Aksi</th>
                                 </tr>

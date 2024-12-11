@@ -38,23 +38,29 @@ class PembayaranRetribusiController extends Controller
         ]);
     
         // Simpan file bukti pembayaran
-        $filePath = $request->file('file_bukti')->store('public/bukti_pembayaran');
+        $file_bukti = $request->file('file_bukti');
+        $file_bukti->move(public_path('bukti_pembayaran'), $file_bukti->getClientOriginalName());
     
         // Simpan data ke database
         Pembayaran::create([
+            'id_user' => auth()->id(),
             'id_ref_bank' => $request->id_ref_bank,
             'no_rekening' => $request->no_rekening,
             'nama_pemilik_rekening' => $request->nama_pemilik_rekening,
             'biaya_retribusi' => $request->biaya_retribusi,
-            'file_bukti' => $filePath,
+            'file_bukti' => $file_bukti->getClientOriginalName(),
         ]);
         MsRekening::create([
             'id_ref_bank' => $request->id_ref_bank,
             'no_rekening' => $request->no_rekening,
             'nama_akun' => $request->nama_pemilik_rekening
         ]);
+        
+        if (auth()->user()->level == 'admin') {
+            return redirect()->route('PembayaranRetribusi.index')->with('success', 'Data pembayaran berhasil disimpan');
+        }
+        return redirect()->route('KonfirmasiPembayaranretribusi.index')->with('success', 'Data pembayaran berhasil disimpan');
     
-        return redirect()->route('KonfirmasiPembayaranRetribusi.index')->with('success', 'Data pembayaran berhasil disimpan');
     }
 
     /**

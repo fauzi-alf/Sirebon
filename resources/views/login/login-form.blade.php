@@ -35,11 +35,11 @@
                 </div>
             @endsession
             <div class="input-box">
-                <input name="username" type="text" placeholder="Username" required>
+                <input name="username" autocomplete="off" type="text" placeholder="Username" required>
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-box">
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" autocomplete="new-password" name="password" placeholder="Password" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <div class="remember-forgot">

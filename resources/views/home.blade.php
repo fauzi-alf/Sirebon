@@ -215,7 +215,7 @@
                                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Jumlah Sudah Bayar</p>
-                                    <h6 class="mb-0">1234</h6>
+                                    <h6 class="mb-0">12</h6>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Jumlah Blm Bayar</p>
-                                    <h6 class="mb-0">234</h6>
+                                    <h6 class="mb-0">29</h6>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Jumlah Total Pemasukan</p>
-                                    <h6 class="mb-0">234</h6>
+                                    <h6 class="mb-0">76544</h6>
                                 </div>
                             </div>
                         </div>

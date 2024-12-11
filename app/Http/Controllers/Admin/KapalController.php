@@ -88,7 +88,7 @@ class KapalController extends Controller
         $kapal = Kapal::findOrFail($id);
         $kapal->update($request->all());
 
-        return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data kapal berhasil diperbarui.');
+        return redirect()->route('KapalWajibRetribusi.index')->with('edit', 'Data kapal berhasil diperbarui.');
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\WajibRetribusi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -14,11 +15,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
-        // $user = session('user');
-
-    // Ambil data 'nama' dari relasi wajibretribusi
-    // $nama = $user->wajibretribusi->nama ?? 'Nama tidak tersedia'; ,'user','nama'
+        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get(); 
 
         return view ('wajibretribusi.profile',compact('wajibRetribusi'));
     }
@@ -58,9 +55,36 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-         
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'nik' => 'required|string|max:16',
+            'nama' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:16',
+            'alamat' => 'required|string|max:255',
+        ]);
+    
+        $user = Auth::user();
+    
+        // Update username pada model user
+        $user->username = $request->input('username');
+        $user->update();
+    
+        // Update data pada model WajibRetribusi
+        $wajibRetribusi = $user->wajibRetribusi;
+    
+        // Pastikan $wajibRetribusi tidak null sebelum diakses
+        if ($wajibRetribusi) {
+            $wajibRetribusi->nik = $request->input('nik');
+            $wajibRetribusi->nama = $request->input('nama');
+            $wajibRetribusi->no_hp = $request->input('no_hp');
+            $wajibRetribusi->alamat = $request->input('alamat');
+            $wajibRetribusi->save(); // Simpan perubahan ke database
+        }
+    
+        return redirect()->route('Profile.index')->with('success', 'Profil berhasil diperbarui!');
+
     }
 
     /**

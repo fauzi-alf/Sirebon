@@ -223,43 +223,50 @@
                         Data Berhasil Dihapus
                     </div>
                 @endsession
-                        <form method="POST" action="{{route('PembayaranRetribusi.store')}}">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="JenisBank" class="form-label">Jenis Bank</label>
-                                <select name="id_ref_bank" class="form-select" id="choices">
-                                    @foreach ($banks as $bank)
-                                        <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="rek" class="form-label">Nomor rekening</label>
-                                <input type="text" name="no_rekening" class="form-control"  id="NomorRekening" required>
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">Nama Pemilik Rekening</label>
-                                <input type="text" class="form-control" name="nama_pemilik_rekening" id="pemilik_rekening" required>
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">Nominal Transfer</label>
-                                <input type="number" class="form-control" name="biaya_retribusi" id="biaya_retribusi" value="{{ $biayaRetribusi }}" readonly >
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">Bukti Pembayaran</label>
-                                <input type="file" class="form-control" name="file_bukti"  id="BuktiBayar" >
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div> --}}
-                            </div>
-                             
-                            <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
-                        </form>
+                <form action="{{ route('PembayaranRetribusi.store') }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                <!-- Field untuk jenis bank tetap -->
+                <div class="row mb-3">
+                    <label for="id_ref_bank" class="col-sm-3 col-form-label">Jenis Bank</label>
+                    <div class="col-sm-9">
+                        <select name="id_ref_bank" class="form-select" id="choices">
+                            @foreach ($banks as $bank)
+                                <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Nomor Rekening</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="no_rekening" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Nama Pemilik Rekening</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="nama_pemilik_rekening" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Nominal Transfer</label>
+                    <div class="col-sm-9">
+                        <input type="number" name="biaya_retribusi" class="form-control"
+                                            required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
+                    <div class="col-sm-9">
+                        <input type="file" name="file_bukti" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Konfirmasi Pembayaran</button>
+            </form>
                     </div>
             </div> 
 
