@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\MsRekening;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use App\Models\RefBank;
 
 class PembayaranRetribusiController extends Controller
 {
@@ -21,7 +22,9 @@ class PembayaranRetribusiController extends Controller
      */
     public function create()
     {
-        //
+        $banks = RefBank::all();
+
+        return view('Admin.Pembayaran.create', compact('banks',));
     }
 
     /**
@@ -62,7 +65,27 @@ class PembayaranRetribusiController extends Controller
         return redirect()->route('KonfirmasiPembayaranretribusi.index')->with('success', 'Data pembayaran berhasil disimpan');
     
     }
+    public function setuju($id)
+{
+    $pembayaran = Pembayaran::findOrFail($id);
+    $pembayaran->status = 'Y'; // Set status menjadi Sesuai
+    $pembayaran->tanggal_tindak_lanjut = now(); // Simpan tanggal tindak lanjut
+    $pembayaran->tindak_lanjut_user = auth()->user()->name; // Simpan nama admin yang menindaklanjuti
+    $pembayaran->save();
 
+    return redirect()->back()->with('success', 'Pembayaran telah disetujui.');
+}
+
+public function tidakSetuju($id)
+{
+    $pembayaran = Pembayaran::findOrFail($id);
+    $pembayaran->status = 'N'; // Set status menjadi Tidak Sesuai
+    $pembayaran->tanggal_tindak_lanjut = now(); // Simpan tanggal tindak lanjut
+    $pembayaran->tindak_lanjut_user = auth()->user()->name; // Simpan nama admin yang menindaklanjuti
+    $pembayaran->save();
+
+    return redirect()->back()->with('success', 'Pembayaran telah ditolak.');
+}
     /**
      * Display the specified resource.
      */

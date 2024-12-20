@@ -94,7 +94,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('kapalku') }}" class="nav-item nav-link"><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -110,28 +110,13 @@
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
                     @endif
-
-                    @if (auth()->user()->level == 'administrator')
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                    class='bx bxs-report'></i> Laporan</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-list-check"></i>
-                                    Retribusi</a>
-                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
-                            </div>
-                        </div>
-                    @endif
+                    <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
+                        Laporan</a> 
+ 
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
-                            Laporan</a>
-                    @endif
+                    @endif 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
@@ -208,61 +193,58 @@
                 <div class="col-sm-12 col-xl-12 mt-3">
                     <div class="bg-light rounded h-100 p-4 m-1">
                         <h6 class="mb-4">Profile</h6>
-                         
-                        <form action="{{route('Profile.update', ['Profile' => Auth::user()->id])}}" method="post">
+                        @session('edit')
+                        <div class="text-center m-2 p-2 alert alert-success">
+                            {{ session('edit') }}
+                        </div>
+                    @endsession
+                        <form method="POST" action="{{ route('Profile.update', ['Profile' => Auth::user()->id]) }}">
                             @csrf
                             @method('PUT')
-                            @foreach ($wajibRetribusi as $data )
-                            <div class="mb-3">
-                                <label for="namalengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" value="{{$data->nama}}" id="namalengkap"
-                                    aria-describedby="namalengkap">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="usename" class="form-label">Username</label>
-                                <input type="text" class="form-control" value="{{ auth()->user()->username }}"
-                                    id="username" aria-describedby="username">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            {{-- <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email </label>
-                                <input type="email" class="form-control" value="{{ auth()->user()->email }}"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                            </div> --}}
-                            <div class="mb-3">
-                                <label for="hakakses" class="form-label">Hak Akses</label>
-                                <input type="text" class="form-control " value="{{ auth()->user()->level }}"
-                                    id="hakakses" aria-describedby="hakakses" disabled>
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="nik" class="form-label">NIK</label>
-                                <input type="text" class="form-control" value="{{$data->nik}}" id="nik"
-                                    aria-describedby="nik">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="telepon" class="form-label">Telepon</label>
-                                <input type="text" class="form-control" value="{{$data->no_hp}}"
-                                    id="telepon" aria-describedby="telepon">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" value="{{$data->alamat}}" id="alamat"
-                                    aria-describedby="alamat">
-                                {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div> --}}
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>    
-                            @endforeach
                             
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Username</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        value="{{ auth()->user()->username }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Hak Akses</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="hakakses"
+                                        value="{{ auth()->user()->level }}" readonly>
+                                </div>
+                            </div>
+                            @if ($data = auth()->user()->wajibRetribusi)
+                            
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Nama</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nama" class="form-control" value="{{ $data->nama }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Telepon</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="no_hp" class="form-control" value="{{ $data->no_hp }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">NIK</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nik" class="form-control" value="{{ $data->nik }}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Alamat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="alamat" class="form-control" value="{{ $data->alamat }}" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4">Simpan</button>
+                                
+                            @endif
                         </form>
                     </div>
 

@@ -14,16 +14,16 @@ use App\Http\Controllers\Admin\KapalController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\WajibRetribusiController;
 use App\Http\Controllers\Retribusi\ProfileController;
+use App\Http\Controllers\Retribusi\KapalkuController;
 use App\Http\Controllers\AppController;
 
 
 use App\Http\Controllers\Retribusi\GantiPasswordController;
 use App\Http\Controllers\PembayaranRetribusiController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\WajibRetribusiNoCRUDController;
+use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\KonfirmasiRetribusiController;
-use App\Http\Controllers\LaporanAdminController;
+use App\Http\Controllers\KonfirmasiRetribusiController; 
+use App\Http\Controllers\LaporanController;
 use App\Models\WajibRetribusi;
 
 // use App\Http\Controllers\RekeningPembayaranRetribusiController;
@@ -110,19 +110,19 @@ Route::group(['middleware' => ['auth', 'ceklevel:administrator,wajibretribusi']]
      
     Route::post('/change-password', [AppController::class, 'updatePassword'])->name('GantiPassword');
     Route::post('/Gantipw', [GantiPasswordController::class, 'update'])->name('GantiPW');
-    
+    Route::get('/laporan/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
+    Route::get('/Laporan', [LaporanController::class, 'index'])->name('laporan.index');
+Route::get('/laporan/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
+    Route::resource('kapalku', KapalkuController::class);
     Route::resource('Profile', ProfileController::class);
     Route::resource('KapalWajibRetribusi', KapalController::class);
     Route::resource('KategoriRetribusi', KategoriController::class);
     Route::resource('RekeningPembayaranRetribusi', RekeningController::class);
     Route::resource('WajibRetribusi', WajibRetribusiController::class);
     Route::resource('PembayaranRetribusi', PembayaranRetribusiController::class);
+    Route::post('/pembayaran/{id}/sesuai', [PembayaranRetribusiController::class, 'setuju'])->name('pembayaran.sesuai');
+    Route::post('/pembayaran/{id}/tidak-sesuai', [PembayaranRetribusiController::class, 'tidakSetuju'])->name('pembayaran.tidak-sesuai');
     Route::resource('KonfirmasiPembayaranretribusi', KonfirmasiRetribusiController::class);
-    Route::get('/LaporanBlmBayar', [LaporanAdminController::class, 'index'])->name('LaporanBlmBayar');
-    Route::get('/CetakLaporanSdhBayar', [LaporanAdminController::class, 'laporansdh'])->name('CetakLaporanSdhBayar');
-    Route::get('/CetakLaporanBlmBayar', [LaporanAdminController::class, 'laporanblm'])->name('CetakLaporanBlmBayar');
-    Route::get('/Laporan', [WajibRetribusiNoCRUDController::class, 'index'])->name('Laporan');
-    Route::get('/CetakLaporan', [WajibRetribusiNoCRUDController::class, 'index1'])->name('CetakLaporan');
-    Route::get('/LaporanRetribusi', [LaporanAdminController::class, 'index2'])->name('LaporanRetribusi');
+    ;
      
 });

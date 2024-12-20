@@ -21,9 +21,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
         'password',
+        'username',
+        'level',
+        'id_user_group',
     ];
 
     /**
@@ -45,8 +47,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    // public function wajibretribusi()
-    // {
-    //     return $this->hasOne(WajibRetribusi::class);
-    // }
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'id_user_group');
+    }
+    public function wajibRetribusi()
+{
+    return $this->hasOne(WajibRetribusi::class, 'id_user');
+}
 }

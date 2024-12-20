@@ -93,7 +93,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -111,27 +111,13 @@
                             Pembayaran Retribusi</a>
                     @endif
 
-                    @if (auth()->user()->level == 'administrator')
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                    class='bx bxs-report'></i> Laporan</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-list-check"></i>
-                                    Retribusi</a>
-                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
-                            </div>
-                        </div>
-                    @endif
+                    <a href="{{ url('Laporan') }}" class="nav-item nav-link active"><i class='bx bxs-report'></i>
+                        Laporan</a> 
+                   
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Laporan') }}" class="nav-item nav-link active"><i class='bx bxs-report'></i>
-                            Laporan</a>
-                    @endif
+                    @endif 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
@@ -214,33 +200,63 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <button onclick="window.print()" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </button>
+                            <a href="{{ route('laporan.export.pdf') }}" class="btn btn-success">Cetak Laporan PDF</a>
                             {{-- {{route('CetakLaporan')}} --}}
                         </div>
 
                     </div>
                     <table class="table table-striped" id="dataTable">
                         <thead>
-                            <tr>
-                                <th class="text-center" scope="col">No.</th>
-                                <th class="text-center" scope="col">Nama Pemilik</th>
-                                <th class="text-center" scope="col">Nama Kapal</th>
-                                <th class="text-center" scope="col">Jenis Kapal</th>
-                                <th class="text-center" scope="col">Ukuran</th> 
+                            <tr class="border-2 border-bottom border-primary border-0">
+                                <th scope="col" class="text-center">No.</th>
+                                <th scope="col" class="text-center">Nama Pemilik Rekening</th>
+                                <th scope="col" class="text-center">No. Rekening</th>
+                                <th scope="col" class="text-center">Biaya Retribusi</th>
+                                <th scope="col" class="text-center">Bukti Pembayaran</th>
+                                <th scope="col" class="text-center">Tanggal Bayar</th>
+                                <th scope="col" class="text-center">Tanggal Tindak Lanjut</th>
+                                <th scope="col" class="text-center">Tindak Lanjut User</th>
+                                <th scope="col" class="text-center">Keterangan</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            
+                        <tbody class="table-group-divider">
+                            @forelse ($pembayaran as $data)
                                 <tr>
-                                    <th scope="col" class="text-center">1.</th>
-                                    <td scope="col" class="text-center">Fauzi
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $data->nama_pemilik_rekening }}</td>
+                                    <td class="text-center">{{ $data->no_rekening }}</td>
+                                    <td class="text-center">
+                                        Rp {{ number_format($data->biaya_retribusi, 2, ',', '.') }}
                                     </td>
-                                    <td scope="col" class="text-center">Kapal Laut</td>
-                                    <td scope="col" class="text-center">Kapal Feri
-                                       </td>
-                                    <td scope="col" class="text-center">30</td>
-                                    
-                                </tr> 
+                                    <td class="text-center">
+                                        <img src="{{ asset('bukti_pembayaran/' . $data->file_bukti) }}"
+                                            alt="{{ $data->nama_pemilik_rekening }}" class="rounded"
+                                            style="width: 100px">
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $data->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $data->tanggal_tindak_lanjut ? \Carbon\Carbon::parse($data->tanggal_tindak_lanjut)->format('d-m-Y') : 'Belum Ditindak' }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $data->tindak_lanjut_user ?? 'Belum Ada' }}
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($data->status == 'Y')
+                                            <span class="badge bg-success">Sesuai</span>
+                                        @elseif ($data->status == 'N')
+                                            <span class="badge bg-danger">Tidak Sesuai</span>
+                                        @else
+                                            <span class="badge bg-warning">Belum Diverifikasi</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">Tidak ada data pembayaran.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

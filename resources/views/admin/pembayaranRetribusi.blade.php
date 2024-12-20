@@ -92,7 +92,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link active"><i
+                        <a href="{{ url('kapalku') }}" class="nav-item nav-link active"><i
                                 class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
@@ -109,29 +109,13 @@
                         <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
-                    @endif
-
-                    @if (auth()->user()->level == 'administrator')
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                    class='bx bxs-report'></i> Laporan</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-list-check"></i>
-                                    Retribusi</a>
-                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
-                            </div>
-                        </div>
-                    @endif
+                    @endif 
+                    <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
+                        Laporan</a> 
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
-                            Laporan</a>
-                    @endif
+                    @endif 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
@@ -215,31 +199,52 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th class="text-center" scope="col">No.</th>
-                                    <th class="text-center" scope="col">Nama Lengkap</th>
-                                    <th class="text-center" scope="col">Rekening</th>
-                                    <th class="text-center" scope="col">Bukti</th>
-                                    <th class="text-center" scope="col">Tanggal Bayar</th>
-                                    <th class="text-center" scope="col">tanggal Tindak Lanjut</th>
-                                    <th class="text-center" scope="col">tanggal Tindak Lanjut User</th>
-                                    <th class="text-center" scope="col">Aksi</th>
+                                    <th scope="col" class="text-center">No.</th>
+                                    <th scope="col" class="text-center">Nama Lengkap</th>
+                                    <th scope="col" class="text-center">Rekening</th>
+                                    <th scope="col" class="text-center">Biaya Retribusi</th>
+                                    <th scope="col" class="text-center">Bukti</th>
+                                    <th scope="col" class="text-center">Tanggal Bayar</th>
+                                    <th scope="col" class="text-center">Tanggal Tindak Lanjut</th>
+                                    <th scope="col" class="text-center">Tindak Lanjut User</th>
+                                    <th scope="col" class="text-center">Keterangan</th>
+                                    <th scope="col" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($pembayaran as $data)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $data->nama_pemilik_rekening }}</td>
-                                <td class="text-center">{{ $data->no_rekening }}</td>
+                                    <td class="text-center">{{ $data->nama_pemilik_rekening }}</td>
+                                    <td class="text-center">{{ $data->no_rekening }}</td>
+                                    <td class="text-center">Rp {{ number_format($data->biaya_retribusi, 2, ',', '.') }}</td>
+                                    <td class="text-center">
+                                        <img src="{{ asset('bukti_pembayaran/' . $data->file_bukti) }}"
+                                            alt="{{ $data->title }}" class="rounded"
+                                            style="width: 100px">
+                                    </td>
+                                    <td class="text-center">{{ $data->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="text-center">{{ $data->tanggal_tindak_lanjut ? $data->tanggal_tindak_lanjut->format('d-m-Y') : 'Belum Ditindak' }}</td>
+                                    <td class="text-center">{{ $data->tindak_lanjut_user ?? 'Belum Ada' }}</td>
+                                    <td class="text-center">
+                                        @if ($data->status == 'Y')
+                                            <span class="badge bg-dark">Sesuai</span>
+                                        @elseif ($data->status == 'N')
+                                            <span class="badge bg-dark">Tidak Sesuai</span>
+                                        @else
+                                            <span class="badge bg-warning">Belum Diverifikasi</span>
+                                        @endif
+                                    </td>
                                 <td class="text-center">
-                                  <img src="{{ asset('bukti_pembayaran/' . $data->file_bukti) }}" alt="{{ $data->title }}" class="rounded" style="width: 100px">
-                                </td>
-                                <td class="text-center">{{ $data->created_at->format('d-m-Y') }}</td>
-                                <td class="text-center">{{ $data->tanggal_tindak_lanjut ?? 'Belum Ditindak' }}</td>
-                                <td class="text-center">{{ $data->tindak_lanjut_user ?? 'Belum Ada' }}</td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-success btn-sm m-1">Sesuai</a>
-                                    <a href="" class="btn btn-danger btn-sm m-1">Tidak Sesuai</a>
+                                    <form action="{{ route('pembayaran.sesuai', $data->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success btn-sm m-1">Sesuai</button>
+                                    </form>
+                                    <form action="{{ route('pembayaran.tidak-sesuai', $data->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm m-1">Tidak Sesuai</button>
+                                    </form>
                                 </td>
                                 </tr>
                                 @endforeach

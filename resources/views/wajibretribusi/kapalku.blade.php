@@ -93,7 +93,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('/Kapalku') }}" class="nav-item nav-link "><i class="fa-solid fa-ship"></i>
+                        <a href="{{ url('kapalku') }}" class="nav-item nav-link active "><i class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
                     @if (auth()->user()->level == 'wajibretribusi')
@@ -110,28 +110,13 @@
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
                     @endif
-
-                    @if (auth()->user()->level == 'administrator')
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active " data-bs-toggle="dropdown"><i
-                                    class='bx bxs-report'></i> Laporan</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item "><i
-                                        class="fa-solid fa-list-check"></i>
-                                    Retribusi</a>
-                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item active"><i
-                                        class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
-                            </div>
-                        </div>
-                    @endif
+                    <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
+                        Laporan</a> 
+ 
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
-                    @endif
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Laporan') }}" class="nav-item nav-link "><i class='bx bxs-report'></i>
-                            Laporan</a>
-                    @endif
+                    @endif 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
@@ -147,7 +132,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="htmlindex." class="navbar-brand d-flex d-lg-none me-4"> 
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4"> 
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
@@ -205,43 +190,71 @@
 
             <div class="col-sm-12 col-xl-11 mt-3">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Laporan Blm Bayar Kapal Wajib Retribusi</h6>
-                    <div class="row">
-                        <div class="col-10">
-
-                            <form class="d-none d-md-flex col-3">
-                                <input class="form-control border-0" type="search" id="searchInput" placeholder="Search">
-                            </form>
-                        </div>
-                        <div class="col-2">
-                            <button onclick="window.print()" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </button>
-                            {{-- <a href="" class="btn btn-sm btn-success "><i class="fa-solid fa-print"></i> Cetak </a> --}}
-                            {{-- {{route('CetakLaporanBlmBayar')}} --}}
-                        </div>
-
+                    <h6 class="mb-4">Kapalku</h6>
+                    
+                    @session('success')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Tambah 
                     </div>
-                    <table class="table table-striped" id="dataTable">
+                @endsession
+                @session('edit')
+                    <div class="text-center m-2 p-2 alert alert-success">
+                        Data Berhasil Di Edit 
+                    </div>
+                @endsession
+                @session('hapus')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data Berhasil Dihapus
+                    </div>
+                @endsession
+                @session('error')
+                    <div class=" text-center m-2 p-2 alert alert-danger">
+                        Data gagal di edit/tambah
+                    </div>
+                @endsession 
+
+                    @if (auth()->user()->level == 'wajibretribusi')
+                        <a href="{{ route('kapalku.create') }}"
+                            class="btn btn-primary rounded-pill m-2"><i class='bx bx-plus-medical'></i> Tambah Data
+                        </a>
+                    @endif
+                    <form class="d-none d-md-flex col-2">
+                        <input class="form-control border-0" type="search" id="searchInput" placeholder="Search">
+                    </form>
+                    <table class="table text-nowrap align-middle mb-0 table-striped" id="dataTable">
                         <thead>
-                            <tr>
-                                <th class="text-center" scope="col">No.</th>
-                                <th class="text-center" scope="col">Nama Pemilik</th>
-                                <th class="text-center" scope="col">Nama Kapal</th>
-                                <th class="text-center" scope="col">Jenis Kapal</th>
-                                <th class="text-center" scope="col">Ukuran</th> 
+                            <tr class="border-2 border-bottom border-primary border-0">
+                                <th scope="col" class="text-center">No.</th>
+                                <th scope="col" class="text-center">Nama Pemilik</th>
+                                <th scope="col" class="text-center">Nama Kapal</th>
+                                <th scope="col" class="text-center">Jenis Kapal</th>
+                                <th scope="col" class="text-center">Ukuran</th>
+                                <th scope="col" class="text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            
+                        <tbody class="table-group-divider">
+                            @foreach ($kapal as $index => $data)
                                 <tr>
-                                    <th scope="col" class="text-center">1.</th>
-                                    <td scope="col" class="text-center">Fauzi
+                                    <td scope="col" class="text-center">{{ $index + 1 }}.</td>
+                                    <td scope="col" class="text-center">{{ $data->wajibRetribusi->nama ?? 'N/A' }}</td>
+                                    <td scope="col" class="text-center">{{ $data->nama_kapal }}</td>
+                                    <td scope="col" class="text-center">{{ $data->jenisKapal->jenis_kapal ?? 'N/A' }}</td>
+                                    <td scope="col" class="text-center">{{ $data->ukuran }}</td>
+                                    <td scope="col" class="text-center">
+                                        <a href="{{ route('kapalku.edit', $data->id) }}"
+                                            class="btn btn-primary btn-sm m-1"><i class='bx bx-message-square-edit' ></i></a>
+
+                                        <form
+                                            action="{{ route('kapalku.destroy', $data->id) }}"
+                                            method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class='bx bx-trash'></i></button>
+                                        </form>
                                     </td>
-                                    <td scope="col" class="text-center">Kapal Laut</td>
-                                    <td scope="col" class="text-center">Kapal Feri
-                                       </td>
-                                    <td scope="col" class="text-center">30</td>
-                                    
-                                </tr> 
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

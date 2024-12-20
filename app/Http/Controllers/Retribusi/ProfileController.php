@@ -15,9 +15,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get(); 
-
-        return view ('wajibretribusi.profile',compact('wajibRetribusi'));
+        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->first();
+        return view('wajibretribusi.profile', compact('wajibRetribusi'));
     }
 
     /**
@@ -83,7 +82,7 @@ class ProfileController extends Controller
             $wajibRetribusi->save(); // Simpan perubahan ke database
         }
     
-        return redirect()->route('Profile.index')->with('success', 'Profil berhasil diperbarui!');
+        return redirect()->route('Profile.index')->with('edit', 'Profil berhasil diperbarui!');
 
     }
 
@@ -94,4 +93,5 @@ class ProfileController extends Controller
     {
         //
     }
-}
+    
+} 

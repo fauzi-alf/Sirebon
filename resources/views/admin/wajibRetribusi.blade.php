@@ -93,7 +93,7 @@
                     @endif
 
                     @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('WajibRetribusi') }}" class="nav-item nav-link active"><i
+                        <a href="{{ url('kapalku') }}" class="nav-item nav-link active"><i
                                 class="fa-solid fa-ship"></i>
                             Kapalku</a>
                     @endif
@@ -106,34 +106,18 @@
                             class='bx bxs-category'></i> Kategori
                         Retribusi
                     </a>
-                    @if (auth()->user()->level == 'administrator')
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                    class='bx bxs-report'></i> Laporan</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="{{ url('/LaporanRetribusi') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-list-check"></i>
-                                    Retribusi</a>
-                                <a href="{{ url('/LaporanBlmBayar') }}" class="dropdown-item"><i
-                                        class="fa-solid fa-file-circle-exclamation"></i> Belum Membayar Retribusi</a>
-                            </div>
-                        </div>
-                    @endif
+                     
                     @if (auth()->user()->level == 'administrator')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>
                     @endif
+                    <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
+                        Laporan</a> 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('/KonfirmasiPembayaranretribusi') }}" class="nav-item nav-link"><i
                                 class="fa-solid fa-user-check"></i> Konfirmasi
                             Pembayaran Retribusi</a>
-                    @endif
-
-
-                    @if (auth()->user()->level == 'wajibretribusi')
-                        <a href="{{ url('Laporan') }}" class="nav-item nav-link"><i class='bx bxs-report'></i>
-                            Laporan</a>
-                    @endif
+                    @endif 
                     @if (auth()->user()->level == 'wajibretribusi')
                         <a href="{{ url('logout') }}" class="nav-item nav-link"><i class='bx bx-log-out'></i>
                             Logout</a>

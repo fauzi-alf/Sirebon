@@ -15,7 +15,16 @@ class KapalController extends Controller
      */
     public function index()
     {
-        $kapal = Kapal::with('wajibRetribusi')->get();
+         // Cek apakah user adalah admin
+         if (auth()->user()->level == 'admin') {
+            // Admin dapat melihat semua data
+            $kapal = Kapal::with('wajibRetribusi', 'jenisKapal')->get();
+        } else {
+            // User wajib retribusi hanya melihat data miliknya
+            $kapal = Kapal::with('wajibRetribusi', 'jenisKapal')
+                ->where('id_user', auth()->id())
+                ->get();
+        }
         return view ('admin.kapalWajibRetribusi', compact('kapal'));
     }
 
@@ -49,6 +58,7 @@ class KapalController extends Controller
             'nama_kapal' => $request->nama_kapal,
             'id_jenis_kapal' => $request->id_jenis_kapal,
             'ukuran' => $request->ukuran,
+            'tanggal_pembayaran' => now()->addMonth()->format('Y-m-d'),
         ]);
     
         return redirect()->route('KapalWajibRetribusi.index')->with('success', 'Data Kapal berhasil ditambahkan.');
